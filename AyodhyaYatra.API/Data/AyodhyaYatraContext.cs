@@ -16,8 +16,8 @@ namespace AyodhyaYatra.API.Data
         {
             Configuration = configuration;
             _httpContextAccessor = httpContextAccessor;
-            //_defaultConnection = "workstation id=mssql-88450-0.cloudclusters.net,12597;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@54321;data source=mssql-88450-0.cloudclusters.net,12597;persist security info=False;initial catalog=KaashiYatri";
-            _defaultConnection = "workstation id=40.64.46.72,1433;TrustServerCertificate=true;user id=KashiYatra;pwd=Gr8@12345;data source=40.64.46.72,1433;persist security info=False;initial catalog=KaashiYatri";
+            //_defaultConnection = "workstation id=mssql-88450-0.cloudclusters.net,12597;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@54321;data source=mssql-88450-0.cloudclusters.net,12597;persist security info=False;initial catalog=ayodhya_yatra";
+            _defaultConnection = "workstation id=40.64.46.72,1433;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@12345;data source=40.64.46.72,1433;persist security info=False;initial catalog=ayodhya_yatra";
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
