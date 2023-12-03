@@ -116,7 +116,7 @@ namespace AyodhyaYatra.API.Services
                 foreach (var item in res.Data)
                 {
                     item.Images = images.Where(x => x.ModuleId == item.Id).ToList();
-                    item.TempleCategoryName = item.TempleCategoryId == 1 ? "Famous Temple" : "Temple in Kashi";                 
+                    item.TempleCategoryName = item.TempleCategoryId == 1 ? "Famous Temple" : "Temple in Ayodhya";                 
                 }
             }
             return res;

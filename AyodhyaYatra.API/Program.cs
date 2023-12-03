@@ -31,7 +31,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "V1",
         Title = "WebAPI",
-        Description = "Kaashi Yatra Web API"
+        Description = "Ayodhya Yatra Web API"
     });
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
@@ -95,9 +95,9 @@ app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     if (app.Environment.IsDevelopment())
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Kashi Yatra Web API");
+        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
     else 
-        options.SwaggerEndpoint("/api/swagger/V1/swagger.json", "Kashi Yatra Web API");
+        options.SwaggerEndpoint("/api/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
     options.DocExpansion(DocExpansion.None);
 });
 

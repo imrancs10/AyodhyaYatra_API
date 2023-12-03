@@ -96,7 +96,7 @@ namespace AyodhyaYatra.API.Services
                 {
                     ToEmail = request.Email,
                     Body = emailBody,
-                    Subject = "Emai verification | Kashi Yatri"
+                    Subject = "Emai verification | Ayodhya Yatri"
                 };
                // _mailService.SendEmailAsync(mailRequest);
             }
