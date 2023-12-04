@@ -94,10 +94,10 @@ app.UseStaticFiles();
 app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
-    if (app.Environment.IsDevelopment())
-        options.SwaggerEndpoint("/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
-    else 
-        options.SwaggerEndpoint("/api/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
+    //if (app.Environment.IsDevelopment())
+    options.SwaggerEndpoint("/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
+    //else 
+    //    options.SwaggerEndpoint("/api/swagger/V1/swagger.json", "Ayodhya Yatra Web API");
     options.DocExpansion(DocExpansion.None);
 });
 
