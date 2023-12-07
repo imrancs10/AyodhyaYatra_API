@@ -39,7 +39,7 @@ namespace AyodhyaYatra.API.Middleware
         public static IServiceCollection RegisterDataServices(this IServiceCollection services)
         {
             //var DefaultConnection = "workstation id=mssql-88450-0.cloudclusters.net,12597;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@54321;data source=mssql-88450-0.cloudclusters.net,12597;persist security info=False;initial catalog=ayodhya_yatra";
-            var DefaultConnection = "workstation id=40.64.46.72,1433;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@12345;data source=40.64.46.72,1433;persist security info=False;initial catalog=ayodhya_yatra";
+            var DefaultConnection = "workstation id=mssql-88450-0.cloudclusters.net,12597;TrustServerCertificate=true;user id=LaBeachUser;pwd=Gr8@54321;data source=mssql-88450-0.cloudclusters.net,12597;persist security info=False;initial catalog=ayodhya_yatra";
             services.AddDbContext<AyodhyaYatraContext>(
                 options => { options.UseSqlServer(DefaultConnection); }
             );
