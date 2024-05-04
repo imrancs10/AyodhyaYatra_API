@@ -67,7 +67,7 @@ namespace AyodhyaYatra.API.Services
             return value.ToString("yyyyMMddHHmmssffff");
         }
 
-        public async Task FileCleanup(int id, ModuleNameEnum moduleName = ModuleNameEnum.Temple, int threshhold = 10, string remark = "")
+        public async Task FileCleanup(int id, ModuleNameEnum moduleName = ModuleNameEnum.MasterAttraction, int threshhold = 10, string remark = "")
         {
             var ImageStore = await _fileStorageRepository.GetByModuleIds(new List<int>() { id }, moduleName);
 
@@ -184,7 +184,7 @@ namespace AyodhyaYatra.API.Services
                 {
                     FilePath= absoluteFilePath,
                     ModuleId=request.ModuleId,
-                    ImageType=request.ImageType,
+                    FileType = request.ImageType,
                     ModuleName=request.ModuleName.ToString(),
                     ThumbPath=thumbPath,
                     Remark=request.Remark??string.Empty

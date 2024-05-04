@@ -2,7 +2,7 @@
 {
     public enum ModuleNameEnum
     {
-        Temple = 0,
+        MasterAttraction = 0,
         Yatra = 1,
         Ghat = 2,
         EducationalInstitute = 3,

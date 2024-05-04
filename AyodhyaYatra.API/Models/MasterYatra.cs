@@ -12,11 +12,6 @@ namespace AyodhyaYatra.API.Models
         public string? HiDescription { get; set; }
         public string? TaDescription { get; set; }
         public string? TeDescription { get; set; }
-        public int? ParentYatraId { get; set; }
-        [ForeignKey("ParentYatraId")]
-        public MasterYatra ParentYatra { get; set; }
-        public List<Temple> Temples { get; set; }
-        public List<ImageStore> Images { get; set; }
         public int DisplayOrder { get; set; }
     }
 }

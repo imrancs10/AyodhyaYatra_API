@@ -3,6 +3,6 @@
     public interface IQrCodeService
     {
         void GenerateQrCode(string qrCodeText, string fileName);
-        Task<bool> GenerateTemplesQrCode();
+        Task<bool> GenerateMasterAttractionQrCode();
     }
 }

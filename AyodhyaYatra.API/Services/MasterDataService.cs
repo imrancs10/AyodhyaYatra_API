@@ -34,26 +34,7 @@ namespace AyodhyaYatra.API.Services
         #endregion
 
         #region Public Methods
-        public async Task<List<DropdownResponse>> GetDivisions()
-        {
-            return _mapper.Map<List<DropdownResponse>>(await _masterDataRepository.GetDivisions());
-        }
-
-        public async Task<List<MasterPadavResponse>> GetPadavs()
-        {
-            var res = _mapper.Map<List<MasterPadavResponse>>(await _masterDataRepository.GetPadavs());
-            if (res != null && res.Count() > 0)
-            {
-                var moduleIds = res.Select(x => x.Id).Distinct().ToList();
-                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.Padav, moduleIds));
-                foreach (var item in res)
-                {
-                    item.Images = images.Where(x => x.ModuleId == item.Id).ToList();
-                }
-            }
-            return res;
-        }
-
+      
         public async Task<List<MasterResponse>> GetYatras()
         {
             var res = _mapper.Map<List<MasterResponse>>(await _masterDataRepository.GetYatras());
@@ -74,22 +55,6 @@ namespace AyodhyaYatra.API.Services
             response.Images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.Yatra, response.Id));
             return response;
         }
-        public async Task<DropdownResponse> AddDivisions(MasterDataRequest request)
-        {
-            var masterDivision = _mapper.Map<MasterDivision>(request);
-            return _mapper.Map<DropdownResponse>(await _masterDataRepository.AddDivisions(masterDivision));
-        }
-
-        public async Task<MasterPadavResponse> AddPadavs(MasterPadavRequest request)
-        {
-            var masterDivision = _mapper.Map<MasterPadav>(request);
-            return _mapper.Map<MasterPadavResponse>(await _masterDataRepository.AddPadavs(masterDivision));
-        }
-        public async Task<int> UpdatePadavs(MasterPadavRequest request)
-        {
-            var masterDivision = _mapper.Map<MasterPadav>(request);
-            return await _masterDataRepository.UpdatePadavs(masterDivision);
-        }
 
         public async Task<MasterResponse> AddYatras(MasterYatraRequest request)
         {
@@ -102,11 +67,6 @@ namespace AyodhyaYatra.API.Services
             return await _masterDataRepository.DeleteDivisions(id);
         }
 
-        public async Task<bool> DeletePadavs(int id)
-        {
-            return await _masterDataRepository.DeletePadavs(id);
-        }
-
         public async Task<bool> DeleteSequenceNos(int id)
         {
             return await _masterDataRepository.DeleteDivisions(id);
@@ -117,22 +77,6 @@ namespace AyodhyaYatra.API.Services
             return await _masterDataRepository.DeleteYatras(id);
         }
 
-        public async Task<List<MasterPadavResponse>> GetPadavs(int yatraId)
-        {
-            var data = _mapper.Map<List<MasterPadavResponse>>(await _masterDataRepository.GetPadavs(yatraId));
-            var padavIds = data.Select(x => x.Id).ToList();
-            var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(ModuleNameEnum.Padav, padavIds));
-            foreach (var item in data)
-            {
-                item.Images = images.Where(x => x.ModuleId == item.Id).ToList();
-            }
-            return data;
-        }
-
-        public async Task<MasterPadavResponse> GetPadavById(int Id)
-        {
-            return _mapper.Map<MasterPadavResponse>(await _masterDataRepository.GetPadavById(Id));
-        }
 
         public async Task<List<MasterResponse>> GetMasterData(ModuleNameEnum masterDataType)
         {
@@ -141,7 +85,7 @@ namespace AyodhyaYatra.API.Services
             {
                 var moduleIds = res.Select(x => x.Id).Distinct().ToList();
                 List<ImageStore> imageStores = new List<ImageStore>();
-                if (masterDataType == ModuleNameEnum.Temple)
+                if (masterDataType == ModuleNameEnum.MasterAttraction)
                     imageStores = await _imageStoreRepository.GetImageStore(masterDataType, moduleIds, true);
                 else
                     imageStores = await _imageStoreRepository.GetImageStore(masterDataType, moduleIds);
@@ -173,7 +117,7 @@ namespace AyodhyaYatra.API.Services
         public async Task<MasterResponse> GetMasterData(int id)
         {
             var res = _mapper.Map<MasterResponse>(await _masterDataRepository.GetMasterData(id));
-            var moduleName = Enums.ModuleNameEnum.Temple;
+            var moduleName = Enums.ModuleNameEnum.MasterAttraction;
             if (res != null)
             {
                 moduleName = res.MasterDataType;

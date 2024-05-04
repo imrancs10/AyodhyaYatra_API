@@ -1,105 +1,91 @@
-﻿using Azure.Core;
-using AyodhyaYatra.API.Contants;
+﻿using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
-using AyodhyaYatra.API.Services;
 using AyodhyaYatra.API.Services.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Configuration;
 
 namespace AyodhyaYatra.API.Controllers
 {
     [Route(StaticValues.APIPrefix)]
     [ApiController]
-    public class TemplesController : ControllerBase
+    public class MasterAttractionsController : ControllerBase
     {
-        private readonly ITempleService _templeService;
+        private readonly IMasterAttractionService _MasterAttractionService;
         private readonly IQrCodeService _qrCodeService;
 
-        public TemplesController(ITempleService templeService, IQrCodeService qrCodeService)
+        public MasterAttractionsController(IMasterAttractionService MasterAttractionService, IQrCodeService qrCodeService)
         {
-            _templeService = templeService;
+            _MasterAttractionService = MasterAttractionService;
             _qrCodeService = qrCodeService;
         }
 
-        [HttpPut(StaticValues.TemplePath)]
-        public async Task<TempleResponse> AddTemple([FromBody] TempleRequest request)
+        [HttpPut(StaticValues.MasterAttractionPath)]
+        public async Task<MasterAttractionResponse> AddMasterAttraction([FromBody] MasterAttractionRequest request)
         {
-            return await _templeService.AddTemple(request);
+            return await _MasterAttractionService.AddMasterAttraction(request);
         }
 
-        [HttpDelete(StaticValues.TempleDeletePath)]
-        public async Task<bool> DeleteTemple([FromRoute] int id)
+        [HttpDelete(StaticValues.MasterAttractionDeletePath)]
+        public async Task<bool> DeleteMasterAttraction([FromRoute] int id)
         {
-            return await _templeService.DeleteTemple(id);
+            return await _MasterAttractionService.DeleteMasterAttraction(id);
         }
 
-        [HttpGet(StaticValues.TempleGetByIdPath)]
-        public async Task<TempleResponse> GetTempleById([FromRoute] int id)
+        [HttpGet(StaticValues.MasterAttractionGetByIdPath)]
+        public async Task<MasterAttractionResponse> GetMasterAttractionById([FromRoute] int id)
         {
-            return await _templeService.GetTempleById(id);
+            return await _MasterAttractionService.GetMasterAttractionById(id);
         }
 
-        [HttpGet(StaticValues.TempleGetByIdOrBarcodeIdPath)]
-        public async Task<TempleResponse> GetTempleById([FromRoute] string barcodeId)
+        [HttpGet(StaticValues.MasterAttractionGetByIdOrBarcodeIdPath)]
+        public async Task<MasterAttractionResponse> GetMasterAttractionById([FromRoute] string barcodeId)
         {
-            return await _templeService.GetTempleById(barcodeId);
+            return await _MasterAttractionService.GetMasterAttractionById(barcodeId);
         }
 
-        [HttpGet(StaticValues.TempleGetByYatraIdPath)]
-        public async Task<List<TempleResponse>> GetTempleByYatraId([FromRoute] int yatraId, [FromQuery] bool includeAllChildYatraTemple = false)
+        [HttpGet(StaticValues.MasterAttractionGetByYatraIdPath)]
+        public async Task<List<MasterAttractionResponse>> GetMasterAttractionByYatraId([FromRoute] int yatraId, [FromQuery] bool includeAllChildYatraMasterAttraction = false)
         {
-            return await _templeService.GetTempleByYatraId(yatraId,includeAllChildYatraTemple);
+            return await _MasterAttractionService.GetMasterAttractionByYatraId(yatraId,includeAllChildYatraMasterAttraction);
         }
 
-        [HttpGet(StaticValues.TemplePath)]
-        public async Task<PagingResponse<TempleResponse>> GetTemples([FromQuery] PagingRequest pagingRequest)
+        [HttpGet(StaticValues.MasterAttractionPath)]
+        public async Task<PagingResponse<MasterAttractionResponse>> GetMasterAttractions([FromQuery] PagingRequest pagingRequest)
         {
-            return await _templeService.GetTemples(pagingRequest);
+            return await _MasterAttractionService.GetMasterAttractions(pagingRequest);
         }
 
-        [HttpGet(StaticValues.TempleSearchPath)]
-        public async Task<PagingResponse<TempleResponse>> SearchTemples([FromQuery] SearchPagingRequest pagingRequest)
+        [HttpGet(StaticValues.MasterAttractionSearchPath)]
+        public async Task<PagingResponse<MasterAttractionResponse>> SearchMasterAttractions([FromQuery] SearchPagingRequest pagingRequest)
         {
-            return await _templeService.SearchTemples(pagingRequest);
+            return await _MasterAttractionService.SearchMasterAttractions(pagingRequest);
         }
 
-        [HttpPost(StaticValues.TemplePath)]
-        public async Task<TempleResponse> UpdateTemple([FromBody] TempleRequest request)
+        [HttpPost(StaticValues.MasterAttractionPath)]
+        public async Task<MasterAttractionResponse> UpdateMasterAttraction([FromBody] MasterAttractionRequest request)
         {
-            return await _templeService.UpdateTemple(request);
-        }
-        [HttpGet(StaticValues.TempleGetByPadavIdPath)]
-        public async Task<List<TempleResponse>> GetTempleByPadavId([FromRoute] int padavId)
-        {
-            return await _templeService.GetTempleByPadavId(padavId);
-        }
-        [HttpGet(StaticValues.TempleGetByYatraPadavIdPath)]
-        public async Task<List<TempleResponse>> GetTempleByYatraAndPadavId([FromRoute] int yatraId, [FromRoute] int padavId)
-        {
-            return await _templeService.GetTempleByYatraAndPadavId(yatraId, padavId);
+            return await _MasterAttractionService.UpdateMasterAttraction(request);
         }
 
-        [HttpGet(StaticValues.GenerateTempleQrCodePath)]
-        public async Task<bool> GenerateTemplesQrCode()
+        [HttpGet(StaticValues.GenerateMasterAttractionQrCodePath)]
+        public async Task<bool> GenerateMasterAttractionsQrCode()
         {
-            return await _qrCodeService.GenerateTemplesQrCode();
+            return await _qrCodeService.GenerateMasterAttractionQrCode();
         }
 
-        [HttpPost(StaticValues.TempleUpdateFromExcelPath)]
+        [HttpPost(StaticValues.MasterAttractionUpdateFromExcelPath)]
         public async Task<string> UpdateDataFromExcel(IFormFile file)
         {
-            return await _templeService.UpdateTempleFromExcel(file);
+            return await _MasterAttractionService.UpdateMasterAttractionFromExcel(file);
         }
 
         //[HttpGet]
-        //[Route(StaticValues.TempleCategoryPath)]
-        //public async Task<List<TempleCategoryResponse>> GetTempleCategory()
+        //[Route(StaticValues.MasterAttractionCategoryPath)]
+        //public async Task<List<MasterAttractionCategoryResponse>> GetMasterAttractionCategory()
         //{
-        //    return await _templeService.GetTempleCategory();
+        //    return await _MasterAttractionService.GetMasterAttractionCategory();
         //}
     }
 }

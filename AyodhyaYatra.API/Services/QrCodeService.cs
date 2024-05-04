@@ -11,8 +11,8 @@ namespace AyodhyaYatra.API.Services
     public class QrCodeService : IQrCodeService
     {
         private readonly IConfiguration _configuration;
-        private readonly ITempleService _templeService;
-        public QrCodeService(IConfiguration configuration, ITempleService templeService)
+        private readonly IMasterAttractionService _templeService;
+        public QrCodeService(IConfiguration configuration, IMasterAttractionService templeService)
         {
             _configuration = configuration;
             _templeService = templeService;
@@ -32,9 +32,9 @@ namespace AyodhyaYatra.API.Services
             QrBitmap.Save(fullFilePath,ImageFormat.Png);
         }
 
-        public async Task<bool> GenerateTemplesQrCode()
+        public async Task<bool> GenerateMasterAttractionQrCode()
         {
-            var templeIds = await _templeService.GetTempleIds();
+            var templeIds = await _templeService.GetMasterAttractionIds();
             string qrCodeUrl = _configuration.GetSection("QrCodeUrlBasePath").Value;
             foreach (var templeId in templeIds)
             {

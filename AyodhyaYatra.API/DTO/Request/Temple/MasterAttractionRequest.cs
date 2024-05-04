@@ -1,11 +1,12 @@
-﻿using AyodhyaYatra.API.DTO.Base;
-using AyodhyaYatra.API.DTO.Response.Common;
-using AyodhyaYatra.API.DTO.Response.Image;
+﻿
+
+using AyodhyaYatra.API.DTO.Base;
+using AyodhyaYatra.API.DTO.Request.ImageStore;
 using AyodhyaYatra.API.Models;
 
-namespace AyodhyaYatra.API.DTO.Response
+namespace AyodhyaYatra.API.DTO.Request
 {
-    public class TempleResponse:BaseResponse
+    public class MasterAttractionRequest:BaseRequest
     {
         public string EnName { get; set; }
         public string HiName { get; set; }
@@ -19,17 +20,10 @@ namespace AyodhyaYatra.API.DTO.Response
         public string Longitude { get; set; }
         public int? YatraId { get; set; }
         public int? PadavId { get; set; }
-        public string PadavEnName { get; set; }
-        public string PadavHiName { get; set; }
-        public string PadavTaName { get; set; }
-        public string PadavTeName { get; set; }
-        public int? TempleCategoryId { get; set; }
         public string Temple360DegreeVideoURL { get; set; }
         public string? SequenceNo { get; set; }
-        public string TempleCategoryName { get; set; }
+        public int? TempleCategoryId { get; set; }
         public string TempleURL { get; set; }
-        public List<ImageStoreResponse> Images { get; set; }
-        public MasterYatra Yatra { get; set; }
         public string VideoURL { get; set; }
     }
 }

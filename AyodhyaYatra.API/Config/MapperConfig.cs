@@ -27,21 +27,12 @@ namespace AyodhyaYatra.API.Config
             #endregion
 
             #region Common
-            CreateMap<MasterDivision, DropdownResponse>()
-               .ForMember(des => des.EnValue, src => src.MapFrom(x => x.DivisionName));
-
-            CreateMap<MasterPadav, MasterPadavResponse>()
-                .ForMember(des => des.EnYatraName, src => src.MapFrom(x => x.Yatra.EnName))
-                .ForMember(des => des.HiYatraName, src => src.MapFrom(x => x.Yatra.HiName))
-                .ForMember(des => des.EnPadavName, src => src.MapFrom(x => x.EnName))
-                .ForMember(des => des.HiPadavName, src => src.MapFrom(x => x.HiName));
 
             CreateMap<MasterYatra, DropdownResponse>()
                 .ForMember(des => des.EnValue, src => src.MapFrom(x => x.EnName))
                 .ForMember(des => des.HiValue, src => src.MapFrom(x => x.HiName))
                 .ForMember(des => des.TaValue, src => src.MapFrom(x => x.TaName))
-                .ForMember(des => des.TeValue, src => src.MapFrom(x => x.TeName))
-                .ForMember(des => des.ParentId, src => src.MapFrom(x => x.ParentYatraId));
+                .ForMember(des => des.TeValue, src => src.MapFrom(x => x.TeName));
             CreateMap<MasterData, DropdownResponse>()
                  .ForMember(des => des.EnValue, src => src.MapFrom(x => x.EnName))
                 .ForMember(des => des.HiValue, src => src.MapFrom(x => x.HiName))
@@ -54,17 +45,6 @@ namespace AyodhyaYatra.API.Config
                 .ForMember(des => des.TeValue, src => src.MapFrom(x => x.TeName))
                .ForMember(des => des.ParentId, src => src.MapFrom(x => x.ParentYatraId));
 
-            CreateMap<MasterDataRequest, MasterDivision>()
-                .ForMember(des => des.DivisionName, src => src.MapFrom(x => x.Value));
-
-            CreateMap<MasterPadavRequest, MasterPadav>()
-                .ForMember(des => des.YatraId, src => src.MapFrom(x => x.YatraId))
-                .ForMember(des => des.EnName, src => src.MapFrom(x => x.EnPadavName))
-                .ForMember(des => des.HiName, src => src.MapFrom(x => x.HiPadavName))
-                .ForMember(des => des.TaName, src => src.MapFrom(x => x.TaPadavName))
-                .ForMember(des => des.TeName, src => src.MapFrom(x => x.TePadavName))
-                .ForMember(des => des.EnDescription, src => src.MapFrom(x => x.EnDescription))
-                .ForMember(des => des.HiDescription, src => src.MapFrom(x => x.HiDescription));
 
             CreateMap<MasterDataRequest, MasterYatra>()
                 .ForMember(des => des.EnName, src => src.MapFrom(x => x.Value));
@@ -76,21 +56,17 @@ namespace AyodhyaYatra.API.Config
               .ForMember(des => des.TeName, src => src.MapFrom(x => x.teName));
             CreateMap<MasterData, MasterDataExt>();
             CreateMap<MasterYatra, MasterDataExt>();
-            CreateMap<Temple, MasterDataExt>();
-            CreateMap<Temple, MasterData>();
+            CreateMap<MasterAttraction, MasterDataExt>();
+            CreateMap<MasterAttraction, MasterData>();
             #endregion
 
-            #region Temple
-            CreateMap<TempleRequest, Temple>();
-            CreateMap<Temple, TempleResponse>()
-                  .ForMember(des => des.PadavHiName, src => src.MapFrom(x => x.Padav.HiName))
-                  .ForMember(des => des.PadavEnName, src => src.MapFrom(x => x.Padav.EnName))
-                  .ForMember(des => des.PadavTaName, src => src.MapFrom(x => x.Padav.TaName))
-                  .ForMember(des => des.PadavTeName, src => src.MapFrom(x => x.Padav.TeName));
-            CreateMap<PagingResponse<Temple>, PagingResponse<TempleResponse>>();
-            CreateMap<Temple, MasterData>();
+            #region MasterAttraction
+            CreateMap<MasterAttractionRequest, MasterAttraction>();
+            CreateMap<MasterAttraction, MasterAttractionResponse>();
+            CreateMap<PagingResponse<MasterAttraction>, PagingResponse<MasterAttractionResponse>>();
+            CreateMap<MasterAttraction, MasterData>();
             CreateMap<PagingResponse<MasterData>, PagingResponse<MasterResponse>>();
-            //CreateMap<TempleCategory, TempleCategoryResponse>();
+            //CreateMap<MasterAttractionCategory, MasterAttractionCategoryResponse>();
             #endregion
 
             #region Image

@@ -32,23 +32,6 @@ namespace AyodhyaYatra.API.Repository
         #endregion
 
         #region Public Methods
-        public async Task<List<MasterDivision>> GetDivisions()
-        {
-            return await _context.MasterDivisions
-                .Where(x => !x.IsDeleted)
-                .OrderBy(x => x.DivisionName)
-                .ToListAsync();
-        }
-
-        public async Task<List<MasterPadav>> GetPadavs()
-        {
-            return await _context.MasterPadavs
-                .Include(x => x.Yatra)
-               .Where(x => !x.IsDeleted)
-               .OrderBy(x => x.YatraId)
-               .ThenBy(x => x.EnName)
-               .ToListAsync();
-        }
 
         public async Task<List<MasterYatra>> GetYatras()
         {
@@ -62,28 +45,6 @@ namespace AyodhyaYatra.API.Repository
             return await _context.MasterYatras
                 .Where(x => !x.IsDeleted && x.Id == id)
                 .FirstOrDefaultAsync();
-        }
-        public async Task<MasterDivision> AddDivisions(MasterDivision request)
-        {
-            var oldData = await _context.MasterDivisions.Where(x => !x.IsDeleted && x.DivisionName == request.DivisionName).FirstOrDefaultAsync();
-            if (oldData != null) throw new BusinessRuleViolationException(StaticValues.ErrorType_AlreadyExist, StaticValues.Error_AlreadyExist);
-
-            var entity = _context.MasterDivisions.Add(request);
-            entity.State = EntityState.Added;
-            if (await _context.SaveChangesAsync() > 0) return entity.Entity;
-            return default(MasterDivision);
-
-        }
-
-        public async Task<MasterPadav> AddPadavs(MasterPadav request)
-        {
-            var oldData = await _context.MasterPadavs.Where(x => !x.IsDeleted && x.EnName == request.EnName && x.YatraId == request.YatraId).FirstOrDefaultAsync();
-            if (oldData != null) throw new BusinessRuleViolationException(StaticValues.ErrorType_AlreadyExist, StaticValues.Error_AlreadyExist);
-
-            var entity = _context.MasterPadavs.Add(request);
-            entity.State = EntityState.Added;
-            if (await _context.SaveChangesAsync() > 0) return entity.Entity;
-            return default(MasterPadav);
         }
 
         public async Task<MasterYatra> AddYatras(MasterYatra request)
@@ -107,16 +68,6 @@ namespace AyodhyaYatra.API.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> DeletePadavs(int id)
-        {
-            var oldData = await _context.MasterPadavs.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync() ?? throw new BusinessRuleViolationException(StaticValues.ErrorType_RecordNotFound, StaticValues.Error_RecordNotFound);
-
-            oldData.IsDeleted = true;
-            var entity = _context.Attach(oldData);
-            entity.State = EntityState.Modified;
-            return await _context.SaveChangesAsync() > 0;
-        }
-
         public async Task<bool> DeleteYatras(int id)
         {
             var oldData = await _context.MasterYatras.Where(x => !x.IsDeleted && x.Id == id).FirstOrDefaultAsync();
@@ -128,29 +79,11 @@ namespace AyodhyaYatra.API.Repository
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<List<MasterPadav>> GetPadavs(int yatraId)
-        {
-            return await _context.MasterPadavs
-               .Include(x => x.Yatra)
-              .Where(x => !x.IsDeleted && x.YatraId == yatraId)
-              .OrderBy(x => x.Id)
-              .ToListAsync();
-        }
-
-        public async Task<MasterPadav> GetPadavById(int Id)
-        {
-            return await _context.MasterPadavs
-               .Include(x => x.Yatra)
-              .Where(x => !x.IsDeleted && x.Id == Id)
-              .OrderBy(x => x.EnName)
-              .FirstOrDefaultAsync();
-        }
-
         public async Task<List<MasterDataExt>> GetMasterData(ModuleNameEnum masterDataType)
         {
-            if (masterDataType == ModuleNameEnum.Temple)
+            if (masterDataType == ModuleNameEnum.MasterAttraction)
             {
-                var data = await _context.Temples.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
+                var data = await _context.MasterAttractions.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
                 return _mapper.Map<List<MasterDataExt>>(data);
             }
             else if (masterDataType == ModuleNameEnum.Yatra)
@@ -236,36 +169,18 @@ namespace AyodhyaYatra.API.Repository
             entity.State = EntityState.Modified;
             return await _context.SaveChangesAsync();
         }
-        public async Task<int> UpdatePadavs(MasterPadav request)
-        {
-            var oldData = await _context.MasterPadavs.Where(x => !x.IsDeleted && x.Id == request.Id).FirstOrDefaultAsync() ?? throw new BusinessRuleViolationException(StaticValues.ErrorType_RecordNotFound, StaticValues.Error_RecordNotFound);
-
-            //oldData.IsDeleted = true;
-            oldData.EnDescription = request.EnDescription;
-            oldData.HiDescription = request.HiDescription;
-            oldData.EnName = request.EnName;
-            oldData.HiName = request.HiName;
-            oldData.TaDescription = request.TaDescription;
-            oldData.TeDescription = request.TeDescription;
-            oldData.TaName = request.TaName;
-            oldData.TeName = request.TeName;
-            oldData.YatraId = request.YatraId;
-            var entity = _context.Attach(oldData);
-            entity.State = EntityState.Modified;
-            return await _context.SaveChangesAsync();
-        }
 
         public async Task<List<MasterDataExt>> GetMasterDataNearByPlacesPath(MasterNearByPlacesRequest request)
         {
-            var temple = await _context.Temples.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
-            var templeData = _mapper.Map<List<MasterDataExt>>(temple);
-            templeData.ForEach(x => x.MasterDataType = ModuleNameEnum.Temple);
+            var MasterAttraction = await _context.MasterAttractions.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
+            var MasterAttractionData = _mapper.Map<List<MasterDataExt>>(MasterAttraction);
+            MasterAttractionData.ForEach(x => x.MasterDataType = ModuleNameEnum.MasterAttraction);
 
             var master = await _context.MasterDatas.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
             var masterData = _mapper.Map<List<MasterDataExt>>(master);
             masterData.ForEach(x => x.MasterDataType = x.MasterDataType);
 
-            var data = templeData.Union(masterData).ToList();
+            var data = MasterAttractionData.Union(masterData).ToList();
 
             var result = await CalculateDistance(data, request.NearByRangeInKM, Convert.ToDouble(request.Latitude), Convert.ToDouble(request.Longitude));
 
@@ -323,7 +238,7 @@ namespace AyodhyaYatra.API.Repository
                   x.Longitude.Contains(pagingRequest.SearchTerm)
               )).OrderBy(x => x.MasterDataType).ToListAsync();
 
-            var temple = await _context.Temples.Where(x => !x.IsDeleted &&
+            var MasterAttraction = await _context.MasterAttractions.Where(x => !x.IsDeleted &&
                 (string.IsNullOrEmpty(pagingRequest.SearchTerm) ||
                   x.EnName.Contains(pagingRequest.SearchTerm) ||
                   x.HiName.Contains(pagingRequest.SearchTerm) ||
@@ -332,10 +247,10 @@ namespace AyodhyaYatra.API.Repository
                   x.Latitude.Contains(pagingRequest.SearchTerm) ||
                   x.Longitude.Contains(pagingRequest.SearchTerm)
               )).OrderBy(x => x.EnName).ToListAsync();
-            var templeData = _mapper.Map<List<MasterData>>(temple);
-            templeData.ForEach(x => x.MasterDataType = ModuleNameEnum.Temple);
+            var MasterAttractionData = _mapper.Map<List<MasterData>>(MasterAttraction);
+            MasterAttractionData.ForEach(x => x.MasterDataType = ModuleNameEnum.MasterAttraction);
 
-            data = data.Union(templeData).ToList();
+            data = data.Union(MasterAttractionData).ToList();
 
             return new PagingResponse<MasterData>
             {
@@ -349,12 +264,12 @@ namespace AyodhyaYatra.API.Repository
         public async Task<List<MasterDataExt>> GetMasterData(List<ModuleNameEnum> masterDataTypes)
         {
             var resp = new List<MasterDataExt>();
-            if (masterDataTypes.Contains(ModuleNameEnum.Temple))
+            if (masterDataTypes.Contains(ModuleNameEnum.MasterAttraction))
             {
-                var data = await _context.Temples.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
+                var data = await _context.MasterAttractions.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
                 resp.AddRange(_mapper.Map<List<MasterDataExt>>(data));
             }
-            else if (masterDataTypes.Contains(ModuleNameEnum.Temple))
+            else if (masterDataTypes.Contains(ModuleNameEnum.MasterAttraction))
             {
                 var data = await _context.MasterYatras.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
                 resp.AddRange(_mapper.Map<List<MasterDataExt>>(data));

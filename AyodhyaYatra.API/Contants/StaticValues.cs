@@ -19,10 +19,6 @@
         #endregion
 
         #region Master Data API
-        public const string MasterGetDivisionPath = "get/divisions";
-        public const string MasterGetPadavPath = "get/padavs";
-        public const string MasterGetPadavByYatraIdPath = "get/padavs/{yatraId}";
-        public const string MasterGetPadavBydPath = "padavs/get/{Id}";
         public const string MasterGetYatraPath = "get/yatras";
         public const string MasterYatraGetByIdPath = "yatra/get/{id}";
         public const string MasterGetSequencePath = "get/sequences";
@@ -32,7 +28,6 @@
         public const string MasterDataGetByTypesPath = "master/data/types";
         public const string MasterDataDropdownPath = "master/data/dropdown";
         public const string MasterDataByIdPath = "master/data/{id}";
-        public const string MasterPadavPath = "padavs";
         public const string MasterYatraPath = "yatras";
         public const string MasterSequencePath = "sequences";
         public const string MasterDataNearByPlacesPath = "master/nearby/data";
@@ -41,17 +36,15 @@
         #endregion
 
         #region Temple
-        public const string TemplePath = "temple";
-        public const string TempleGetByIdPath = "temple/get/{id}";
-        public const string TempleGetByIdOrBarcodeIdPath = "barcodetemple/get/{barcodeId}";
-        public const string TempleGetByYatraIdPath = "temple/get/yatra/{yatraId}";
-        public const string TempleGetByPadavIdPath = "temple/get/padav/{padavId}";
-        public const string TempleGetByYatraPadavIdPath = "temple/get/yatrapadav/{yatraId}/{padavId}";
-        public const string TempleSearchPath = "temple/search";
-        public const string TempleDeletePath = "temple/delete/{id}";
-        public const string TempleCategoryPath = "get/templeCategories";
-        public const string GenerateTempleQrCodePath = "temple/generate/temple/qr/code";
-        public const string TempleUpdateFromExcelPath = "temple/update/excel";
+        public const string MasterAttractionPath = "master/attraction";
+        public const string MasterAttractionGetByIdPath = "master/attraction/get/{id}";
+        public const string MasterAttractioneGetByIdOrBarcodeIdPath = "master/attraction/barcode/get/{barcodeId}";
+        public const string MasterAttractionGetByYatraIdPath = "master/attraction/get/yatra/{yatraId}";
+        public const string MasterAttractionSearchPath = "master/attraction/search";
+        public const string MasterAttractionDeletePath = "master/attraction/delete/{id}";
+        public const string GenerateMasterAttractionQrCodePath = "master/attraction/generate/qr/code";
+        public const string MasterAttractionUpdateFromExcelPath = "master/attraction/update/excel";
+        public const string MasterAttractionGetByIdOrBarcodeIdPath = "master/attraction/get/by/id/barcode";
         #endregion
 
         #region Image Upload

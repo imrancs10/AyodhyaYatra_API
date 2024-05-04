@@ -9,7 +9,7 @@ namespace AyodhyaYatra.API.Models
         public int ModuleId { get; set; }
         public string ModuleName { get; set; }
         public string? Remark { get; set; }
-        public string ImageType { get; set; }
+        public string FileType { get; set; }
         public bool Verified { get; set; }
     }
 

@@ -35,7 +35,7 @@ namespace AyodhyaYatra.API.Repository
             return await _context.ImageStores
                 .Where(x => !x.IsDeleted &&
                         x.ModuleId == moduleId &&
-                        x.ModuleName == moduleName.ToString() && x.ImageType == imageType)
+                        x.ModuleName == moduleName.ToString() && x.FileType == imageType)
                 .ToListAsync();
         }
 
@@ -44,7 +44,7 @@ namespace AyodhyaYatra.API.Repository
             var data = await _context.ImageStores
                .Where(x => !x.IsDeleted &&
                       moduleIds.Contains(x.ModuleId) &&
-                       ((x.ModuleName == moduleName.ToString() && moduleName != null) || moduleName == null) && (x.ImageType == imageType || imageType == "file" || imageType == null))
+                       ((x.ModuleName == moduleName.ToString() && moduleName != null) || moduleName == null) && (x.FileType == imageType || imageType == "file" || imageType == null))
                .ToListAsync();
             return data;
         }
@@ -65,7 +65,7 @@ namespace AyodhyaYatra.API.Repository
                 .Where(x => !x.IsDeleted &&
                         x.ModuleId == moduleId &&
                         x.ModuleName == moduleName.ToString() &&
-                        x.ImageType == imageType)
+                        x.FileType == imageType)
                 .ToListAsync();
         }
 
@@ -73,7 +73,7 @@ namespace AyodhyaYatra.API.Repository
         {
             var data= await _context.ImageStores
                .Where(x => !x.IsDeleted &&
-                       x.ImageType == imageType)
+                       x.FileType == imageType)
                .ToListAsync();
             var newData=new List<ImageStore>();
             foreach (var moduleNameAndId in moduleNameAndIds)
@@ -94,16 +94,16 @@ namespace AyodhyaYatra.API.Repository
             var data=await _context.ImageStores
                 .Where(x => !x.IsDeleted &&
                         x.ModuleName == moduleName.ToString() &&
-                       (allImage || x.ImageType == imageType))
+                       (allImage || x.FileType == imageType))
                 .OrderByDescending(x=>x.CreatedAt)
                 .ToListAsync();
             var ids=new List<int>();
             var resp=data.Skip(pageSize*(pageNo-1)).Take(pageSize).ToList();
             var finalResp=new List<ImageStoreWithName>();
-            if(moduleName==ModuleNameEnum.Temple)
+            if(moduleName==ModuleNameEnum.MasterAttraction)
             {
                 ids=resp.Select(x=>x.ModuleId).ToList();
-                var moduleData=await _context.Temples.Where(x=>ids.Contains(x.Id)).ToListAsync();
+                var moduleData=await _context.MasterAttractions.Where(x=>ids.Contains(x.Id)).ToListAsync();
                 var dic = moduleData.ToDictionary(x => x.Id, y => y);
                 resp.ForEach(ele =>
                 {

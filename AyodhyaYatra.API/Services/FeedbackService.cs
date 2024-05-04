@@ -66,7 +66,7 @@ namespace AyodhyaYatra.API.Services
         public async Task<DashboardResponse> GetDashboardCount()
         {
             var response = new DashboardResponse();
-            response.TempleCount = await _context.Temples.Where(x => !x.IsDeleted).CountAsync();
+            response.TempleCount = await _context.MasterAttractions.Where(x => !x.IsDeleted).CountAsync();
             response.RegistrationCount = await _context.Users.Where(x => !x.IsDeleted).CountAsync();
             response.YatraCount = await _context.MasterYatras.Where(x => !x.IsDeleted).CountAsync();
             return response;

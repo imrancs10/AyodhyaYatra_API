@@ -31,33 +31,7 @@ namespace AyodhyaYatra.API.Controllers
         #endregion
 
         #region Public Methods
-        [HttpGet]
-        [Route(StaticValues.MasterGetDivisionPath)]
-        public async Task<List<DropdownResponse>> GetDivisions()
-        {
-            return await _masterDataService.GetDivisions();
-        }
 
-        [HttpGet]
-        [Route(StaticValues.MasterGetPadavPath)]
-        public async Task<List<MasterPadavResponse>> GetPadavs()
-        {
-            return await _masterDataService.GetPadavs();
-        }
-
-        [HttpGet]
-        [Route(StaticValues.MasterGetPadavByYatraIdPath)]
-        public async Task<List<MasterPadavResponse>> GetPadavs([FromRoute]int yatraId)
-        {
-            return await _masterDataService.GetPadavs(yatraId);
-        }
-
-        [HttpGet]
-        [Route(StaticValues.MasterGetPadavBydPath)]
-        public async Task<MasterPadavResponse> GetPadavById([FromRoute] int Id)
-        {
-            return await _masterDataService.GetPadavById(Id);
-        }
 
         [HttpGet]
         [Route(StaticValues.MasterGetYatraPath)]
@@ -83,26 +57,6 @@ namespace AyodhyaYatra.API.Controllers
         public async Task<int> UpdateYatra([FromBody] MasterYatraRequest request)
         {
             return await _masterDataService.UpdateYatra(request);
-        }
-        [HttpPut]
-        [Route(StaticValues.MasterPadavPath)]
-        public async Task<MasterPadavResponse> AddPadavs(MasterPadavRequest request)
-        {
-            return await _masterDataService.AddPadavs(request);
-        }
-
-        [HttpPost]
-        [Route(StaticValues.MasterPadavPath)]
-        public async Task<int> UpdatePadavs(MasterPadavRequest request)
-        {
-            return await _masterDataService.UpdatePadavs(request);
-        }
-
-        [HttpPut]
-        [Route(StaticValues.MasterDivisionPath)]
-        public async Task<DropdownResponse> AddDivisions(MasterDataRequest request)
-        {
-            return await _masterDataService.AddDivisions(request);
         }
 
         [HttpPut]
@@ -162,19 +116,6 @@ namespace AyodhyaYatra.API.Controllers
             return await _masterDataService.DeleteYatras(id);
         }
 
-        [HttpDelete]
-        [Route(StaticValues.MasterPadavPath)]
-        public async Task<bool> DeletePadavs([FromQuery] int id)
-        {
-            return await _masterDataService.DeletePadavs(id);
-        }
-
-        [HttpDelete]
-        [Route(StaticValues.MasterDivisionPath)]
-        public async Task<bool> DeleteDivisions([FromQuery] int id)
-        {
-            return await _masterDataService.DeleteDivisions(id);
-        }
 
         [HttpPost]
         [Route(StaticValues.MasterDataNearByPlacesPath)]

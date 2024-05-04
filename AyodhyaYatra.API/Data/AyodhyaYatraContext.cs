@@ -27,12 +27,11 @@ namespace AyodhyaYatra.API.Data
         }
 
         public DbSet<User> Users { get; set; }
-        public DbSet<MasterDivision> MasterDivisions { get; set; }
-        public DbSet<TempleSequence> TempleSequences { get; set; }
-        public DbSet<MasterPadav> MasterPadavs { get; set; }
-        public DbSet<Temple> Temples { get; set; }
+        public DbSet<MasterAttraction> MasterAttractions { get; set; }
+        public DbSet<MasterAttractionType> MasterAttractionTypes { get; set; }
         public DbSet<ImageStore> ImageStores { get; set; }
-        public DbSet<MasterYatra> MasterYatras { get; set; }
+        public DbSet<MasterYatra> MasterYatras { get; set; } 
+        public DbSet<YatraAttractionMapper> YatraAttractionMappers { get; set; }
         public DbSet<MasterData> MasterDatas { get; set; }
         public DbSet<NewsUpdate> NewsUpdates { get; set; }
         public DbSet<ThreeSixtyDegreeGallery> ThreeSixtyDegreeGallery { get; set; }
