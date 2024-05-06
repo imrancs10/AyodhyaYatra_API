@@ -12,6 +12,5 @@ namespace AyodhyaYatra.API.Models
         public string? HiDescription { get; set; }
         public string? TaDescription { get; set; }
         public string? TeDescription { get; set; }
-        public int DisplayOrder { get; set; }
     }
 }
