@@ -2,10 +2,12 @@
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.ImageStore;
+using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Request.NewsUpdate;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.Image;
+using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response.MasterData;
 using AyodhyaYatra.API.Models;
 
@@ -62,11 +64,14 @@ namespace AyodhyaYatra.API.Config
 
             #region MasterAttraction
             CreateMap<MasterAttractionRequest, MasterAttraction>();
-            CreateMap<MasterAttraction, MasterAttractionResponse>();
+            CreateMap<MasterAttraction, MasterAttractionResponse>()
+                .ForMember(des => des.AttractionType, src => src.MapFrom(x => x.MasterAttractionType.Name));
             CreateMap<PagingResponse<MasterAttraction>, PagingResponse<MasterAttractionResponse>>();
             CreateMap<MasterAttraction, MasterData>();
             CreateMap<PagingResponse<MasterData>, PagingResponse<MasterResponse>>();
-            //CreateMap<MasterAttractionCategory, MasterAttractionCategoryResponse>();
+            CreateMap<MasterAttractionTypeRequest, MasterAttractionType>();
+            CreateMap<MasterAttractionType, MasterAttractionTypeResponse>();
+            CreateMap<PagingResponse<MasterAttractionType>, PagingResponse<MasterAttractionTypeResponse>>();
             #endregion
 
             #region Image

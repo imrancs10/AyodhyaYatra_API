@@ -35,7 +35,7 @@
 
         #endregion
 
-        #region Temple
+        #region Master Attraction
         public const string MasterAttractionPath = "master/attraction";
         public const string MasterAttractionGetByIdPath = "master/attraction/get/{id}";
         public const string MasterAttractioneGetByIdOrBarcodeIdPath = "master/attraction/barcode/get/{barcodeId}";
@@ -45,6 +45,12 @@
         public const string GenerateMasterAttractionQrCodePath = "master/attraction/generate/qr/code";
         public const string MasterAttractionUpdateFromExcelPath = "master/attraction/update/excel";
         public const string MasterAttractionGetByIdOrBarcodeIdPath = "master/attraction/get/by/id/barcode";
+
+        public const string MasterAttractionTypePath = "master/attraction/type";
+        public const string MasterAttractionTypeSearchPath = "master/attraction/type/search";
+        public const string MasterAttractionTypeDeletePath = "master/attraction/type/delete/{id}";
+        public const string MasterAttractionTypeGetByCodePath = "master/attraction/type/get/code";
+        public const string MasterAttractionTypeGetByIdPath = "master/attraction/type/get/{id}";
         #endregion
 
         #region Image Upload
@@ -70,6 +76,7 @@
         public const string ErrorType_InvalidModuleName = "InvalidModuleName";
         public const string ErrorType_ImageNotSelected = "ImageNotSelected";
         public const string ErrorType_RecordNotFound = "RecordNotFound";
+        public const string ErrorType_CodeIsAlreadyExist = "CodeIsAlreadyExist";
         public const string ErrorType_AlreadyDeleted = "AlreadyDeleted";
         public const string ErrorType_AlreadyExist = "AlreadyExist";
         public const string ErrorType_EmailAlreadyVerified = "EmailAlreadyVerified";
@@ -77,6 +84,7 @@
 
         #region Error Message
         public const string Error_InvalidDataSupplied = "Invalid data supplied";
+        public const string Error_CodeIsAlreadyExist = "Code is already exist";
         public const string Error_NoDataSupplied = "No data supplied";
         public const string Error_InvalidCredentials = "Wrong username/password";
         public const string Error_UserNotFound = "User is not registered.";

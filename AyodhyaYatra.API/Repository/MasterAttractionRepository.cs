@@ -58,6 +58,7 @@ namespace AyodhyaYatra.API.Repository
         public async Task<MasterAttraction?> GetMasterAttractionById(int id)
         {
             return await _context.MasterAttractions
+                .Include(x=>x.MasterAttractionType)
                 .Where(x => !x.IsDeleted && x.Id == id)
                 .FirstOrDefaultAsync();
         }

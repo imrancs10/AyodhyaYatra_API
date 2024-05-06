@@ -1,24 +1,28 @@
 ﻿using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
+using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
+using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AyodhyaYatra.API.Controllers
 {
-    [Route(StaticValues.APIPrefix)]
+    [Route("v1/")]
     [ApiController]
     public class MasterAttractionsController : ControllerBase
     {
         private readonly IMasterAttractionService _MasterAttractionService;
         private readonly IQrCodeService _qrCodeService;
+        private readonly IMasterAttractionTypeService _MasterAttractionTypeService;
 
-        public MasterAttractionsController(IMasterAttractionService MasterAttractionService, IQrCodeService qrCodeService)
+        public MasterAttractionsController(IMasterAttractionService MasterAttractionService, IQrCodeService qrCodeService,IMasterAttractionTypeService masterAttractionTypeService)
         {
             _MasterAttractionService = MasterAttractionService;
             _qrCodeService = qrCodeService;
+            _MasterAttractionTypeService = masterAttractionTypeService;
         }
 
         [HttpPut(StaticValues.MasterAttractionPath)]
@@ -81,11 +85,54 @@ namespace AyodhyaYatra.API.Controllers
             return await _MasterAttractionService.UpdateMasterAttractionFromExcel(file);
         }
 
-        //[HttpGet]
-        //[Route(StaticValues.MasterAttractionCategoryPath)]
-        //public async Task<List<MasterAttractionCategoryResponse>> GetMasterAttractionCategory()
-        //{
-        //    return await _MasterAttractionService.GetMasterAttractionCategory();
-        //}
+        [ProducesResponseType(typeof(int), 200)]
+        [HttpPut(StaticValues.MasterAttractionTypePath)]
+        public async Task<int> AddAttractionType([FromBody] MasterAttractionTypeRequest req)
+        {
+            return await _MasterAttractionTypeService.Add(req);
+        }
+
+        [ProducesResponseType(typeof(bool), 200)]
+        [HttpPost(StaticValues.MasterAttractionTypePath)]
+        public async Task<bool> UpdateAttractionType([FromBody] MasterAttractionTypeRequest req)
+        {
+            return await _MasterAttractionTypeService.Update(req);
+        }
+
+        [ProducesResponseType(typeof(PagingResponse<MasterAttractionTypeResponse>), 200)]
+        [HttpGet(StaticValues.MasterAttractionTypePath)]
+        public async Task<PagingResponse<MasterAttractionTypeResponse>> GetAllAttractionType([FromQuery]PagingRequest req)
+        {
+            return await _MasterAttractionTypeService.GetAll(req);
+        }
+
+        [ProducesResponseType(typeof(List<MasterAttractionTypeResponse>), 200)]
+        [HttpGet(StaticValues.MasterAttractionTypeSearchPath)]
+        public async Task<List<MasterAttractionTypeResponse>> SearchAttractionType([FromQuery]string searchTearm)
+        {
+            return await _MasterAttractionTypeService.Search(searchTearm);
+        }
+
+
+        [ProducesResponseType(typeof(MasterAttractionTypeResponse), 200)]
+        [HttpGet(StaticValues.MasterAttractionTypeGetByCodePath)]
+        public async Task<MasterAttractionTypeResponse> GetAttractionTypeByCode([FromQuery]string code)
+        {
+            return await _MasterAttractionTypeService.GetByCode(code);
+        }
+
+        [ProducesResponseType(typeof(MasterAttractionTypeResponse), 200)]
+        [HttpGet(StaticValues.MasterAttractionTypeGetByIdPath)]
+        public async Task<MasterAttractionTypeResponse> GetAttractionTypeById([FromRoute] int id)
+        {
+            return await _MasterAttractionTypeService.GetById(id);
+        }
+
+        [ProducesResponseType(typeof(bool), 200)]
+        [HttpDelete(StaticValues.MasterAttractionTypeDeletePath)]
+        public async Task<bool> DeleteAttractionTypeByCode([FromRoute]int id)
+        {
+            return await _MasterAttractionTypeService.Delete(id);
+        }
     }
 }

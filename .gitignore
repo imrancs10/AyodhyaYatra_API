@@ -20,3 +20,4 @@ bin
 obj
 packages
 **/obj/*
+/AyodhyaYatra.API/wwwroot/AppImages

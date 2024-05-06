@@ -11,7 +11,7 @@ namespace AyodhyaYatra.API.DTO.Request
         public bool CreateThumbnail { get; set; } = true;
         public string Remark { get; set; }
         public int SequenceNo { get; set; }
-        public string ImageType { get; set; } = "Image";
+        public string FileType { get; set; } = "Image";
     }
     public class FileUploadRequest: FileUploadQueryRequest
     {

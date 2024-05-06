@@ -21,6 +21,8 @@ namespace AyodhyaYatra.API.Middleware
                 .AddScoped<IMasterDataService, MasterDataService>()
                 .AddScoped<IMasterAttractionRepository, MasterAttractionRepository>()
                 .AddScoped<IMasterAttractionService, MasterAttractionService>()
+                 .AddScoped<IMasterAttractionTypeRepository, MasterAttractionTypeRepository>()
+                .AddScoped<IMasterAttractionTypeService, MasterAttractionTypeService>()
                 .AddScoped<IImageStoreRepository, ImageStoreRepository>()
                 .AddScoped<IFileStorageRepository, FileStorageRepository>()
                 .AddScoped<IFileStorageService, FileStorageService>()
