@@ -86,11 +86,6 @@ namespace AyodhyaYatra.API.Repository
                 var data = await _context.MasterAttractions.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
                 return _mapper.Map<List<MasterDataExt>>(data);
             }
-            else if (masterDataType == ModuleNameEnum.Yatra)
-            {
-                var data = await _context.MasterYatras.Where(x => !x.IsDeleted).OrderBy(x => x.DisplayOrder).ToListAsync();
-                return _mapper.Map<List<MasterDataExt>>(data);
-            }
             else
             {
                 var data = await _context.MasterDatas.Where(x => !x.IsDeleted && x.MasterDataType == masterDataType).OrderBy(x => x.EnName).ToListAsync();

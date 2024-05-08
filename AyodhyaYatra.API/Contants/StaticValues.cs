@@ -51,6 +51,12 @@
         public const string MasterAttractionTypeDeletePath = "master/attraction/type/delete/{id}";
         public const string MasterAttractionTypeGetByCodePath = "master/attraction/type/get/code";
         public const string MasterAttractionTypeGetByIdPath = "master/attraction/type/get/{id}";
+
+        public const string MasterAttractionYatraMapperPath = "master/attraction/yatra/mapper";
+        public const string MasterAttractionYatraMapperSearchPath = "master/attraction/yatra/mapper/search";
+        public const string MasterAttractionYatraMapperDeletePath = "master/attraction/yatra/mapper/delete/{id}";
+        public const string MasterAttractionYatraMapperGetByYatraIdPath = "master/attraction/yatra/mapper/get/by/yatra";
+        public const string MasterAttractionYatraMapperGetByIdPath = "master/attraction/yatra/mapper/get/{id}";
         #endregion
 
         #region Image Upload

@@ -14,5 +14,6 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<PagingResponse<YatraAttractionMapperResponse>> GetAll(PagingRequest pagingRequest);
         Task<YatraAttractionMapperResponse> GetById(int id);
         Task<List<YatraAttractionMapperResponse>> Search(string searchTerm);
+        Task<List<YatraAttractionMapperResponse>> GetByYatraId(int yatraId);
     }
 }

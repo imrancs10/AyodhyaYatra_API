@@ -8,6 +8,7 @@ using AyodhyaYatra.API.DTO.Response.Yatra;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
+using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -41,6 +42,11 @@ namespace AyodhyaYatra.API.Services
         public async Task<YatraAttractionMapperResponse> GetById(int id)
         {
             return _mapper.Map<YatraAttractionMapperResponse>(await _attractionYatraMapperRepository.GetById(id));
+        }
+
+        public async Task<List<YatraAttractionMapperResponse>> GetByYatraId(int yatraId)
+        {
+            return _mapper.Map<List<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.GetByYatraId(yatraId));
         }
 
         public async Task<List<YatraAttractionMapperResponse>> Search(string searchTerm)

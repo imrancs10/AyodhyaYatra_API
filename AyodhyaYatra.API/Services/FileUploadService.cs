@@ -184,7 +184,7 @@ namespace AyodhyaYatra.API.Services
                 {
                     FilePath= absoluteFilePath,
                     ModuleId=request.ModuleId,
-                    FileType = request.ImageType,
+                    FileType = request.FileType,
                     ModuleName=request.ModuleName.ToString(),
                     ThumbPath=thumbPath,
                     Remark=request.Remark??string.Empty

@@ -5,6 +5,7 @@ using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository.IRepository;
+using MailKit.Search;
 using Microsoft.EntityFrameworkCore;
 
 namespace AyodhyaYatra.API.Repository
@@ -51,6 +52,7 @@ namespace AyodhyaYatra.API.Repository
                 .Include(x => x.MasterAttraction)
                 .Where(x => !x.IsDeleted)
                 .OrderBy(x => x.YatraId)
+                .ThenBy(x=>x.DisplayOrder)
                 .AsQueryable();
             return new PagingResponse<YatraAttractionMapper>
             {
@@ -70,6 +72,16 @@ namespace AyodhyaYatra.API.Repository
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<List<YatraAttractionMapper>> GetByYatraId(int yatraId)
+        {
+            return await _context.YatraAttractionMappers
+            .Include(x => x.MasterYatra)
+            .Include(x => x.MasterAttraction)
+            .Where(x => !x.IsDeleted && x.YatraId==yatraId)
+            .OrderBy(x => x.DisplayOrder)
+            .ToListAsync();
+        }
+
         public async Task<List<YatraAttractionMapper>> Search(string searchTerm)
         {
             searchTerm = string.IsNullOrEmpty(searchTerm) ? string.Empty : searchTerm;
@@ -77,7 +89,7 @@ namespace AyodhyaYatra.API.Repository
                 .Include(x=>x.MasterYatra)
                 .Include(x=>x.MasterAttraction)
                 .Where(x => !x.IsDeleted && (x.MasterAttraction.EnName.Contains(searchTerm) || x.MasterYatra.EnName.Contains(searchTerm)))
-                .OrderBy(x => x.MasterYatra.EnName)
+                .OrderBy(x => x.DisplayOrder)
                 .ToListAsync();
         }
 
