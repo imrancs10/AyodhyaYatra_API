@@ -19,19 +19,19 @@ namespace AyodhyaYatra.API.Controllers
         }
 
         [HttpPut(StaticValues.VisitorAddDocTypePath)]
-        public async Task<int> AddDocumentType(VisitorDocumentTypeRequest documentType)
+        public async Task<int> AddDocumentType([FromBody] VisitorDocumentTypeRequest documentType)
         {
             return await _visitorService.AddDocumentType(documentType);
         }
 
         [HttpPut(StaticValues.VisitorAddPath)]
-        public async Task<int> AddVisitor(VisitorRequest visitor)
+        public async Task<int> AddVisitor([FromBody] VisitorRequest visitor)
         {
             return await _visitorService.AddVisitor(visitor);
         }
 
         [HttpDelete(StaticValues.VisitorDeleteDocTypePath)]
-        public async Task<bool> DeleteDocumentType(int id)
+        public async Task<bool> DeleteDocumentType([FromRoute] int id)
         {
            return await _visitorService.DeleteDocumentType(id);
         }
@@ -43,19 +43,19 @@ namespace AyodhyaYatra.API.Controllers
         }
 
         [HttpGet(StaticValues.VisitorGetPath)]
-        public async Task<List<VisitorResponse>> GetsVisitors(PagingRequest pagingRequest)
+        public async Task<List<VisitorResponse>> GetsVisitors([FromQuery] PagingRequest pagingRequest)
         {
            return await _visitorService.GetsVisitors(pagingRequest);
         }
 
         [HttpPost(StaticValues.VisitorUpdateDocTypePath)]
-        public async Task<bool> UpdateDocumentType(VisitorDocumentTypeRequest documentType)
+        public async Task<bool> UpdateDocumentType([FromBody]VisitorDocumentTypeRequest documentType)
         {
             return await _visitorService.UpdateDocumentType(documentType);
         }
 
         [HttpGet(StaticValues.VisitorGetCountPath)]
-        public async Task<int> VisitorCount(int month, int year)
+        public async Task<int> VisitorCount([FromQuery] int month,[FromQuery] int year)
         {
             return await _visitorService.VisitorCount(month, year);
         }
