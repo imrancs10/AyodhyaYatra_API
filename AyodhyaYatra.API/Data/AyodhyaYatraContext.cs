@@ -40,6 +40,9 @@ namespace AyodhyaYatra.API.Data
         public DbSet<PhotoGallery> PhotoGallery { get; set; }
         public DbSet<PhotoAlbum> PhotoAlbum { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
+        public DbSet<VisitorDocumentType> VisitorDocumentTypes { get; set; }
+
+        public DbSet<Visitor> Visitors { get; set; }
 
         public override int SaveChanges()
         {

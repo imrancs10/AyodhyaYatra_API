@@ -29,6 +29,8 @@ namespace AyodhyaYatra.API.Middleware
                 .AddScoped<IFileStorageRepository, FileStorageRepository>()
                 .AddScoped<IFileStorageService, FileStorageService>()
                 .AddScoped<IFileUploadService, FileUploadService>()
+                .AddScoped<IVisitorRepository, VisitorRepository>()
+                .AddScoped<IVisitorService, VisitorService>()
                 .AddScoped<IMailService, MailService>()
                 .AddScoped<INewsUpdateService, NewsUpdateService>()
                 .AddScoped<IExcelReader, ExcelReader>()

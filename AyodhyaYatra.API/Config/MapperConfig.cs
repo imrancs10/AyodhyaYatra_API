@@ -4,12 +4,14 @@ using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.ImageStore;
 using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Request.NewsUpdate;
+using AyodhyaYatra.API.DTO.Request.Visitor;
 using AyodhyaYatra.API.DTO.Request.Yatra;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.Image;
 using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response.MasterData;
+using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.DTO.Response.Yatra;
 using AyodhyaYatra.API.Models;
 
@@ -82,6 +84,16 @@ namespace AyodhyaYatra.API.Config
                 .ForMember(des => des.MasterAttractionName, src => src.MapFrom(x => x.MasterAttraction.EnName))
                 .ForMember(des => des.YatraName, src => src.MapFrom(x => x.MasterYatra.EnName));
             CreateMap<PagingResponse<YatraAttractionMapper>, PagingResponse<YatraAttractionMapperResponse>>();
+            #endregion
+
+            #region Visitor
+            CreateMap<VisitorRequest, Visitor>();
+            CreateMap<Visitor, VisitorResponse>()
+                .ForMember(des => des.DocumentType, src => src.MapFrom(x => x.VisitorDocumentType.Name));
+            CreateMap<PagingResponse<Visitor>, PagingResponse<VisitorResponse>>();
+            CreateMap<VisitorDocumentTypeRequest, VisitorDocumentType>();
+            CreateMap<VisitorDocumentType, VisitorDocumentTypeResponse>();
+            CreateMap<PagingResponse<VisitorDocumentType>, PagingResponse<VisitorDocumentTypeResponse>>();
             #endregion
 
             #region Image

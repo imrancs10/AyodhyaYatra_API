@@ -57,6 +57,14 @@
         public const string MasterAttractionYatraMapperDeletePath = "master/attraction/yatra/mapper/delete/{id}";
         public const string MasterAttractionYatraMapperGetByYatraIdPath = "master/attraction/yatra/mapper/get/by/yatra";
         public const string MasterAttractionYatraMapperGetByIdPath = "master/attraction/yatra/mapper/get/{id}";
+
+        public const string VisitorAddDocTypePath = "visitors/add/doctype";
+        public const string VisitorAddPath = "visitors/add";
+        public const string VisitorDeleteDocTypePath = "visitors/delete/doctype/{id}";
+        public const string VisitorGetDocTypePath = "visitors/get/doctype";
+        public const string VisitorGetPath = "visitors/get";
+        public const string VisitorGetCountPath = "visitors/get/count";
+        public const string VisitorUpdateDocTypePath = "visitors/update/doctype";
         #endregion
 
         #region Image Upload
@@ -85,10 +93,14 @@
         public const string ErrorType_CodeIsAlreadyExist = "CodeIsAlreadyExist";
         public const string ErrorType_AlreadyDeleted = "AlreadyDeleted";
         public const string ErrorType_AlreadyExist = "AlreadyExist";
+        public const string ErrorType_InvalidGovDocType = "InvalidGovDocType";
+        public const string ErrorType_InvalidGovDocNo = "InvalidGovDocNo";
         public const string ErrorType_EmailAlreadyVerified = "EmailAlreadyVerified";
         #endregion
 
         #region Error Message
+        public const string Error_InvalidGovDocType = "Invalid government document type.";
+        public const string Error_InvalidGovDocNo = "Invalid governmentdocument number.";
         public const string Error_InvalidDataSupplied = "Invalid data supplied";
         public const string Error_CodeIsAlreadyExist = "Code is already exist";
         public const string Error_NoDataSupplied = "No data supplied";
