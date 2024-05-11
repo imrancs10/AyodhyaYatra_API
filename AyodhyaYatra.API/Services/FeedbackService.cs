@@ -16,6 +16,8 @@ using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
 using Microsoft.EntityFrameworkCore;
+using AyodhyaYatra.API.DTO.Response.MasterAttraction;
+using AyodhyaYatra.API.DTO.Response.Visitor;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -65,10 +67,27 @@ namespace AyodhyaYatra.API.Services
         }
         public async Task<DashboardResponse> GetDashboardCount()
         {
-            var response = new DashboardResponse();
-            response.TempleCount = await _context.MasterAttractions.Where(x => !x.IsDeleted).CountAsync();
-            response.RegistrationCount = await _context.Users.Where(x => !x.IsDeleted).CountAsync();
-            response.YatraCount = await _context.MasterYatras.Where(x => !x.IsDeleted).CountAsync();
+            var response = new DashboardResponse
+            {
+                RegistrationCount = await _context.Visitors.Where(x => !x.IsDeleted).CountAsync(),
+                YatraCount = await _context.MasterYatras.Where(x => !x.IsDeleted).CountAsync(),
+                AttractionCounts = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+                .Where(x => !x.IsDeleted)
+                .GroupBy(x => x.AttractionTypeId)
+                .Select(x => new AttractionCountResponse()
+                {
+                    AttractionType = x.FirstOrDefault().MasterAttractionType.Name,
+                    Count = x.Count()
+                })
+                .ToListAsync(),
+                MonthlyVisitorCounts=await _context.Visitors
+                                            .GroupBy(item => $"{item.VisitDate.Month}-{item.VisitDate.Year}") // Group by month
+                                            .Select(g =>new MonthlyVisitorCountResponse() {
+                                                MonthYear = g.Key, // Month
+                                                Count = g.Count() // Count of items in each group
+                                            }).OrderBy(x=>x.MonthYear).ToListAsync()
+            };
             return response;
         }
         public async Task<NewsUpdateResponse> GetNewsUpdateById(int Id)
