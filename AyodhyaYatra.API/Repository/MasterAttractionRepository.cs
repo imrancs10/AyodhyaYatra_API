@@ -114,23 +114,10 @@ namespace AyodhyaYatra.API.Repository
                 return null;
             }
         }
-        public async Task<List<MasterAttraction>> GetMasterAttractionByYatraAndPadavId(int yatraId, int padavId)
-        {
-            try
-            {
-                var result = await _context.MasterAttractions
-                 .Where(x => !x.IsDeleted)
-                 .ToListAsync();
-                return result;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
-        }
         public async Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest)
         {
             var data = await _context.MasterAttractions
+                .Include(x=>x.MasterAttractionType)
               .Where(x => !x.IsDeleted)
               .OrderBy(x => x.EnName)
               .ToListAsync();

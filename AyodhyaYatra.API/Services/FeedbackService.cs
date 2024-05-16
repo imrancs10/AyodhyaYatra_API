@@ -75,7 +75,7 @@ namespace AyodhyaYatra.API.Services
                 .Include(x => x.MasterAttractionType)
                 .Where(x => !x.IsDeleted)
                 .GroupBy(x => x.AttractionTypeId)
-                .Select(x => new AttractionCountResponse()
+                .Select(x => new AttractionCountResponse() 
                 {
                     AttractionType = x.FirstOrDefault().MasterAttractionType.Name,
                     Count = x.Count()
