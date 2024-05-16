@@ -47,15 +47,20 @@ namespace AyodhyaYatra.API.Services
         public async Task<MasterAttractionResponse> GetMasterAttractionById(int id)
         {
             var response = _mapper.Map<MasterAttractionResponse>(await _MasterAttractionRepository.GetMasterAttractionById(id));
+            if (response != null) { 
             var listOfIds = new List<int>() { response.Id };
             response.Images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, listOfIds, true));
+            }
             return response;
         }
         public async Task<MasterAttractionResponse> GetMasterAttractionById(string idorbarcodeId)
         {
             var response = _mapper.Map<MasterAttractionResponse>(await _MasterAttractionRepository.GetMasterAttractionById(idorbarcodeId));
-            var listOfIds = new List<int>() { response.Id };
-            response.Images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, listOfIds, true));
+            if (response != null)
+            {
+                var listOfIds = new List<int>() { response.Id };
+                response.Images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, listOfIds, true));
+            }
             return response;
         }
         public async Task<List<MasterAttractionResponse>> GetMasterAttractionByYatraId(int yatraId, bool includeAllChildYatraMasterAttraction = false)
