@@ -82,9 +82,9 @@ namespace AyodhyaYatra.API.Services
                 })
                 .ToListAsync(),
                 MonthlyVisitorCounts=await _context.Visitors
-                                            .GroupBy(item => $"{item.VisitDate.Month}-{item.VisitDate.Year}") // Group by month
+                                            .GroupBy(item => item.VisitDate.Month) // Group by month
                                             .Select(g =>new MonthlyVisitorCountResponse() {
-                                                MonthYear = g.Key, // Month
+                                                MonthYear = g.Key.ToString(), // Month
                                                 Count = g.Count() // Count of items in each group
                                             }).OrderBy(x=>x.MonthYear).ToListAsync()
             };
