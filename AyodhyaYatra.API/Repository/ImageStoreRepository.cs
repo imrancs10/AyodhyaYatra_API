@@ -69,6 +69,15 @@ namespace AyodhyaYatra.API.Repository
                 .ToListAsync();
         }
 
+        public async Task<List<ImageStore>> GetImageStore(ModuleNameEnum moduleName, string fileType = "image")
+        {
+            return await _context.ImageStores
+                .Where(x => !x.IsDeleted &&
+                        x.ModuleName == moduleName.ToString() &&
+                        x.FileType == fileType)
+                .ToListAsync();
+        }
+
         public async Task<List<ImageStore>> GetImageStore(Dictionary<ModuleNameEnum, List<int>> moduleNameAndIds, string imageType = "image")
         {
             var data= await _context.ImageStores

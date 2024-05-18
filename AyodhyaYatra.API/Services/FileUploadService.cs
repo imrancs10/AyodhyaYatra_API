@@ -155,7 +155,7 @@ namespace AyodhyaYatra.API.Services
             if (requests.Count==0)
                 throw new NotFoundException(StaticValues.ErrorType_ImageNotSelected, StaticValues.Error_ImageNotSelected);
 
-            List<ImageStore> images = new List<ImageStore>();
+            List<ImageStore> images = new();
             foreach (FileUploadRequest request in requests)
             {
                 var newFileName = $"{request.ModuleId}-{GetFileName(request.File)}";

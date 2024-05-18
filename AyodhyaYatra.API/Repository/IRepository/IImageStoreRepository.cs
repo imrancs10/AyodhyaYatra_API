@@ -10,6 +10,7 @@ namespace AyodhyaYatra.API.Repository.IRepository
         Task<List<ImageStore>> GetImageStore(ModuleNameEnum? moduleName, List<int> moduleIds, string imageType = "image");
         Task<List<ImageStore>> GetImageStore(ModuleNameEnum moduleName, int moduleId,int sequenceNo, string imageType = "image");
         Task<List<ImageStore>> GetImageStore(ModuleNameEnum? moduleName, List<int> moduleIds, bool allImage);
+        Task<List<ImageStore>> GetImageStore(ModuleNameEnum moduleName, string fileType = "image");
         Task<List<ImageStoreWithName>> GetImageStore(ModuleNameEnum? moduleName,int pageNo,int pageSize, bool allImage = false, string imageType = "image");
         Task<ImageStore?> DeleteFile(int id);
     }
