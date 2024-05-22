@@ -1,5 +1,6 @@
 ﻿using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.Data;
+using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Exceptions;
@@ -24,7 +25,7 @@ namespace AyodhyaYatra.API.Repository
                 throw new BusinessRuleViolationException(StaticValues.ErrorType_NoDataSupplied, StaticValues.Error_NoDataSupplied);
             }
 
-            if (await _context.YatraAttractionMappers.Where(x => !x.IsDeleted && x.YatraId == yatraAttractionMapper.YatraId || x.MasterAttractionId == yatraAttractionMapper.MasterAttractionId).AnyAsync())
+            if (await _context.YatraAttractionMappers.Where(x => !x.IsDeleted && x.YatraId == yatraAttractionMapper.YatraId && x.MasterAttractionId == yatraAttractionMapper.MasterAttractionId).AnyAsync())
             {
                 throw new BusinessRuleViolationException(StaticValues.ErrorType_AlreadyExist, StaticValues.Error_AlreadyExist);
             }
@@ -40,7 +41,8 @@ namespace AyodhyaYatra.API.Repository
                 .Where(x => x.Id == Id && !x.IsDeleted)
                 .FirstOrDefaultAsync() ?? throw new BusinessRuleViolationException(StaticValues.ErrorType_RecordNotFound, StaticValues.Error_RecordNotFound);
 
-            data.IsDeleted = false;
+            data.IsDeleted = true;
+            _context.Update(data);
             return await _context.SaveChangesAsync() > 0;
 
         }
@@ -82,15 +84,23 @@ namespace AyodhyaYatra.API.Repository
             .ToListAsync();
         }
 
-        public async Task<List<YatraAttractionMapper>> Search(string searchTerm)
+        public async Task<PagingResponse<YatraAttractionMapper>> Search(SearchPagingRequest request)
         {
-            searchTerm = string.IsNullOrEmpty(searchTerm) ? string.Empty : searchTerm;
-            return await _context.YatraAttractionMappers
+            request.SearchTerm = string.IsNullOrEmpty(request.SearchTerm) ? "all" : request.SearchTerm;
+            var query= _context.YatraAttractionMappers
                 .Include(x=>x.MasterYatra)
                 .Include(x=>x.MasterAttraction)
-                .Where(x => !x.IsDeleted && (x.MasterAttraction.EnName.Contains(searchTerm) || x.MasterYatra.EnName.Contains(searchTerm)))
+                .Where(x => !x.IsDeleted && (request.SearchTerm=="all" || x.MasterAttraction.EnName.Contains(request.SearchTerm) || x.MasterYatra.EnName.Contains(request.SearchTerm)))
                 .OrderBy(x => x.DisplayOrder)
-                .ToListAsync();
+                .AsQueryable();
+
+            return new PagingResponse<YatraAttractionMapper>
+            {
+                PageNo = request.PageNo,
+                PageSize = request.PageSize,
+                Data = await query.Skip(request.PageSize * (request.PageNo - 1)).Take(request.PageSize).ToListAsync(),
+                TotalCount = await query.CountAsync()
+            };
         }
 
         public async Task<bool> Update(YatraAttractionMapper yatraAttractionMapper)

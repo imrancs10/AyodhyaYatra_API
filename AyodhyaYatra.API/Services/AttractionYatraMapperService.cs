@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Request.Yatra;
@@ -49,9 +50,9 @@ namespace AyodhyaYatra.API.Services
             return _mapper.Map<List<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.GetByYatraId(yatraId));
         }
 
-        public async Task<List<YatraAttractionMapperResponse>> Search(string searchTerm)
+        public async Task<PagingResponse<YatraAttractionMapperResponse>> Search(SearchPagingRequest request)
         {
-            return _mapper.Map<List<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.Search(searchTerm));
+            return _mapper.Map<PagingResponse<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.Search(request));
         }
 
         public async Task<bool> Update(YatraAttractionMapperRequest masterAttractionTypeReq)

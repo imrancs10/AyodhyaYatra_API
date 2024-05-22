@@ -1,4 +1,5 @@
-﻿using AyodhyaYatra.API.DTO.Request.Common;
+﻿using AyodhyaYatra.API.DTO.Request;
+using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.Yatra;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.Yatra;
@@ -13,7 +14,7 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<bool> Delete(int Id);
         Task<PagingResponse<YatraAttractionMapperResponse>> GetAll(PagingRequest pagingRequest);
         Task<YatraAttractionMapperResponse> GetById(int id);
-        Task<List<YatraAttractionMapperResponse>> Search(string searchTerm);
+        Task<PagingResponse<YatraAttractionMapperResponse>> Search(SearchPagingRequest request);
         Task<List<YatraAttractionMapperResponse>> GetByYatraId(int yatraId);
     }
 }

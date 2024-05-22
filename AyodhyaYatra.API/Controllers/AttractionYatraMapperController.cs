@@ -1,4 +1,5 @@
 ﻿using AyodhyaYatra.API.Contants;
+using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Request.Yatra;
@@ -24,28 +25,28 @@ namespace AyodhyaYatra.API.Controllers
 
         [ProducesResponseType(typeof(int), 200)]
         [HttpPut(StaticValues.MasterAttractionYatraMapperPath)]
-        public async Task<int> AddAttractionType([FromBody] YatraAttractionMapperRequest req)
+        public async Task<int> Add([FromBody] YatraAttractionMapperRequest req)
         {
             return await _attractionYatraMapperService.Add(req);
         }
 
         [ProducesResponseType(typeof(bool), 200)]
         [HttpPost(StaticValues.MasterAttractionYatraMapperPath)]
-        public async Task<bool> UpdateAttractionType([FromBody] YatraAttractionMapperRequest req)
+        public async Task<bool> Update([FromBody] YatraAttractionMapperRequest req)
         {
             return await _attractionYatraMapperService.Update(req);
         }
 
         [ProducesResponseType(typeof(PagingResponse<YatraAttractionMapperResponse>), 200)]
         [HttpGet(StaticValues.MasterAttractionYatraMapperPath)]
-        public async Task<PagingResponse<YatraAttractionMapperResponse>> GetAllAttractionType([FromQuery] PagingRequest req)
+        public async Task<PagingResponse<YatraAttractionMapperResponse>> GetAll([FromQuery] PagingRequest req)
         {
             return await _attractionYatraMapperService.GetAll(req);
         }
 
         [ProducesResponseType(typeof(List<YatraAttractionMapperResponse>), 200)]
         [HttpGet(StaticValues.MasterAttractionYatraMapperSearchPath)]
-        public async Task<List<YatraAttractionMapperResponse>> SearchAttractionType([FromQuery] string searchTearm)
+        public async Task<PagingResponse<YatraAttractionMapperResponse>> Search([FromQuery] SearchPagingRequest searchTearm)
         {
             return await _attractionYatraMapperService.Search(searchTearm);
         }
@@ -60,14 +61,14 @@ namespace AyodhyaYatra.API.Controllers
 
         [ProducesResponseType(typeof(YatraAttractionMapperResponse), 200)]
         [HttpGet(StaticValues.MasterAttractionYatraMapperGetByIdPath)]
-        public async Task<YatraAttractionMapperResponse> GetAttractionTypeById([FromRoute] int id)
+        public async Task<YatraAttractionMapperResponse> GetById([FromRoute] int id)
         {
             return await _attractionYatraMapperService.GetById(id);
         }
 
         [ProducesResponseType(typeof(bool), 200)]
         [HttpDelete(StaticValues.MasterAttractionYatraMapperDeletePath)]
-        public async Task<bool> DeleteAttractionTypeByCode([FromRoute] int id)
+        public async Task<bool> Delete([FromRoute] int id)
         {
             return await _attractionYatraMapperService.Delete(id);
         }
