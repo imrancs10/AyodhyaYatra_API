@@ -81,6 +81,8 @@ namespace AyodhyaYatra.API.Config
             #region Yatra
             CreateMap<YatraAttractionMapperRequest, YatraAttractionMapper>();
             CreateMap<YatraAttractionMapper, YatraAttractionMapperResponse>()
+                .ForMember(des => des.Yatra, src => src.MapFrom(x => x.MasterYatra))
+                .ForMember(des => des.MasterAttractionResponse, src => src.MapFrom(x => x.MasterAttraction))
                 .ForMember(des => des.MasterAttractionName, src => src.MapFrom(x => x.MasterAttraction.EnName))
                 .ForMember(des => des.YatraName, src => src.MapFrom(x => x.MasterYatra.EnName));
             CreateMap<PagingResponse<YatraAttractionMapper>, PagingResponse<YatraAttractionMapperResponse>>();

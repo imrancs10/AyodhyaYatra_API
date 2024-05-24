@@ -1,15 +1,12 @@
 ﻿using AutoMapper;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
-using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Request.Yatra;
 using AyodhyaYatra.API.DTO.Response.Common;
-using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response.Yatra;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
-using DocumentFormat.OpenXml.Office2010.Excel;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -47,7 +44,8 @@ namespace AyodhyaYatra.API.Services
 
         public async Task<List<YatraAttractionMapperResponse>> GetByYatraId(int yatraId)
         {
-            return _mapper.Map<List<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.GetByYatraId(yatraId));
+            var data= _mapper.Map<List<YatraAttractionMapperResponse>>(await _attractionYatraMapperRepository.GetByYatraId(yatraId));
+            return data;
         }
 
         public async Task<PagingResponse<YatraAttractionMapperResponse>> Search(SearchPagingRequest request)
