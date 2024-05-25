@@ -1,4 +1,5 @@
-﻿using AyodhyaYatra.API.DTO.Response.MasterData;
+﻿using AyodhyaYatra.API.DTO.Response.Image;
+using AyodhyaYatra.API.DTO.Response.MasterData;
 
 namespace AyodhyaYatra.API.DTO.Response.Yatra
 {

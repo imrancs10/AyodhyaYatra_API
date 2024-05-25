@@ -6,6 +6,10 @@ namespace AyodhyaYatra.API.DTO.Response.MasterData
 {
     public class MasterResponse : BaseResponse
     {
+        public MasterResponse()
+        {
+            Images = new List<ImageStoreResponse>();
+        }
         public string EnName { get; set; }
         public string? HiName { get; set; }
         public string? TaName { get; set; }
