@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AyodhyaYatra.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("v1")]
     [ApiController]
     public class VisitorsController : ControllerBase
     {
