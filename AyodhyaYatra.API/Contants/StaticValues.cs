@@ -40,6 +40,7 @@
         public const string MasterAttractionGetByIdPath = "master/attraction/get/{id}";
         public const string MasterAttractioneGetByIdOrBarcodeIdPath = "master/attraction/barcode/get/{barcodeId}";
         public const string MasterAttractionGetByYatraIdPath = "master/attraction/get/yatra/{yatraId}";
+        public const string MasterAttractionGetByTypeIdPath = "master/attraction/get/type/{typeId}";
         public const string MasterAttractionSearchPath = "master/attraction/search";
         public const string MasterAttractionDeletePath = "master/attraction/delete/{id}";
         public const string GenerateMasterAttractionQrCodePath = "master/attraction/generate/qr/code";

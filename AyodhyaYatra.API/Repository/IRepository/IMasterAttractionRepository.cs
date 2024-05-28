@@ -18,6 +18,8 @@ namespace AyodhyaYatra.API.Repository.IRepository
         Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest);
         Task<PagingResponse<MasterAttraction>> SearchMasterAttractions(SearchPagingRequest pagingRequest);
         Task<List<int>> GetTempleIds();
+
+        Task<List<MasterAttraction>> GetMasterAttractionByTypeId(int typeId);
         //Task<List<TempleCategory>> GetTempleCategory();
 
     }

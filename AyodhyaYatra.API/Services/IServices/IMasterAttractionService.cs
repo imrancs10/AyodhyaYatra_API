@@ -22,5 +22,7 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<List<int>> GetMasterAttractionIds();
         Task<string> UpdateMasterAttractionFromExcel(IFormFile formFile);
 
+        Task<List<MasterAttractionResponse>> GetMasterAttractionByTypeId(int typeId);
+
     }
 }

@@ -61,6 +61,12 @@ namespace AyodhyaYatra.API.Controllers
             return await _MasterAttractionService.GetMasterAttractions(pagingRequest);
         }
 
+        [HttpGet(StaticValues.MasterAttractionGetByTypeIdPath)]
+        public async Task<List<MasterAttractionResponse>> MasterAttractionGetByTypeId([FromRoute] int typeId)
+        {
+            return await _MasterAttractionService.GetMasterAttractionByTypeId(typeId);
+        }
+
         [HttpGet(StaticValues.MasterAttractionSearchPath)]
         public async Task<PagingResponse<MasterAttractionResponse>> SearchMasterAttractions([FromQuery] SearchPagingRequest pagingRequest)
         {

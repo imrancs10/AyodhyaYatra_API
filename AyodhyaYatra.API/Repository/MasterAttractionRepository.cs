@@ -58,7 +58,7 @@ namespace AyodhyaYatra.API.Repository
         public async Task<MasterAttraction?> GetMasterAttractionById(int id)
         {
             return await _context.MasterAttractions
-                .Include(x=>x.MasterAttractionType)
+                .Include(x => x.MasterAttractionType)
                 .Where(x => !x.IsDeleted && x.Id == id)
                 .FirstOrDefaultAsync();
         }
@@ -74,8 +74,8 @@ namespace AyodhyaYatra.API.Repository
             try
             {
                 return await _context.YatraAttractionMappers
-                    .Include(x=>x.MasterYatra)
-                    .Include(x=>x.MasterAttraction)
+                    .Include(x => x.MasterYatra)
+                    .Include(x => x.MasterAttraction)
                     .Where(x => x.YatraId == yatraId && !x.IsDeleted).ToListAsync();
             }
             catch (Exception ex)
@@ -86,7 +86,7 @@ namespace AyodhyaYatra.API.Repository
         public async Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest)
         {
             var data = await _context.MasterAttractions
-                .Include(x=>x.MasterAttractionType)
+                .Include(x => x.MasterAttractionType)
               .Where(x => !x.IsDeleted)
               .OrderBy(x => x.EnName)
               .ToListAsync();
@@ -97,6 +97,16 @@ namespace AyodhyaYatra.API.Repository
                 Data = data.Skip(pagingRequest.PageSize * (pagingRequest.PageNo - 1)).Take(pagingRequest.PageSize).ToList(),
                 TotalCount = data.Count
             };
+        }
+
+        public async Task<List<MasterAttraction>> GetMasterAttractionByTypeId(int typeId)
+        {
+            var data = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == typeId)
+              .OrderBy(x => x.EnName)
+              .ToListAsync();
+            return data;
         }
 
         public async Task<PagingResponse<MasterAttraction>> SearchMasterAttractions(SearchPagingRequest pagingRequest)
@@ -158,12 +168,12 @@ namespace AyodhyaYatra.API.Repository
 
         public async Task<bool> UpdateMasterAttraction(List<MasterAttraction> MasterAttractions)
         {
-            var ids=MasterAttractions.Where(x=>x.Id!=0).Select(x => x.Id).ToList();
+            var ids = MasterAttractions.Where(x => x.Id != 0).Select(x => x.Id).ToList();
             var dic = MasterAttractions.Where(x => x.Id != 0).ToDictionary(x => x.Id, y => y);
-            var oldData=await _context.MasterAttractions.Where(x=>!x.IsDeleted && ids.Contains(x.Id)).ToListAsync();
-            foreach(var data in oldData)
+            var oldData = await _context.MasterAttractions.Where(x => !x.IsDeleted && ids.Contains(x.Id)).ToListAsync();
+            foreach (var data in oldData)
             {
-                if(dic.ContainsKey(data.Id))
+                if (dic.ContainsKey(data.Id))
                 {
                     if (!string.IsNullOrEmpty(dic[data.Id].HiDescription))
                         data.HiDescription = dic[data.Id].HiDescription;

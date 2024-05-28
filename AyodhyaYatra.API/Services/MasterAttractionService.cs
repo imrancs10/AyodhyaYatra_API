@@ -104,6 +104,26 @@ namespace AyodhyaYatra.API.Services
             return res;
         }
 
+        public async Task<List<MasterAttractionResponse>> GetMasterAttractionByTypeId(int typeId)
+        {
+            var res = _mapper.Map<List<MasterAttractionResponse>>(await _MasterAttractionRepository.GetMasterAttractionByTypeId(typeId));
+            var images = await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction);
+            if (images.Count > 0)
+            {
+                var imageDic = images.ToLookup(x => x.ModuleId).ToDictionary(x => x.Key, x => x.First());
+                foreach (var masterAttraction in res)
+                {
+                    masterAttraction.Images = imageDic.ContainsKey(masterAttraction.Id) ?
+                        new List<ImageStoreResponse>() {
+                            _mapper.Map<ImageStoreResponse>(imageDic[masterAttraction.Id])
+                        } :
+                        new List<ImageStoreResponse>();
+                }
+            }
+
+            return res;
+        }
+
         public async Task<PagingResponse<MasterAttractionResponse>> SearchMasterAttractions(SearchPagingRequest pagingRequest)
         {
             return _mapper.Map<PagingResponse<MasterAttractionResponse>>(await _MasterAttractionRepository.SearchMasterAttractions(pagingRequest));
