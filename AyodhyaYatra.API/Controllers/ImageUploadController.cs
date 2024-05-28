@@ -55,6 +55,16 @@ namespace AyodhyaYatra.API.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status503ServiceUnavailable)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        [HttpGet(StaticValues.FileGetImageByModNameModNamePath)]
+        public async Task<List<ImageStoreResponse>> GetImageStoreByModule([FromQuery] ModuleNameEnum moduleName)
+        {
+            return await _fileStoreService.GetByModuleName(moduleName.ToString());
+        }
+
+        [ProducesResponseType(typeof(List<ImageStoreResponse>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet(StaticValues.FileGetImageByModNameModIdsPath)]
         public async Task<List<ImageStoreResponse>> GetImageStore([FromQuery] ModuleNameEnum moduleName, [FromQuery] List<int> moduleIds, [FromQuery] string imageType = "image")
         {

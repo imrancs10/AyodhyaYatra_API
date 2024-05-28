@@ -70,6 +70,7 @@
         #region Image Upload
         public const string FileUploadPath = "upload";
         public const string FileGetImageByModNameModIdPath = "image/get/modname/id";
+        public const string FileGetImageByModNameModNamePath = "image/get/modname";
         public const string FileGetImageByModNameModIdsPath = "image/get/modname/ids";
         public const string FileGetImageByModNameModIdSeqPath = "image/get/modname/id/seq";
         public const string FileGetImageByModNamePagingPath = "image/get/modname/paging";

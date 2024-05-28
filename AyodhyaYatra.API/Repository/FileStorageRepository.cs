@@ -54,9 +54,24 @@ namespace AyodhyaYatra.API.Repositories
 
         public async Task<List<ImageStore>> GetByModuleName(ModuleNameEnum moduleName)
         {
-            return await _context.ImageStores
+            var data= await _context.ImageStores
                 .Where(fs => fs.ModuleName.Equals(moduleName.ToString()))
                 .ToListAsync();
+            if(moduleName==ModuleNameEnum.MasterAttraction)
+            {
+                var attractionIds=data.Select(x=>x.ModuleId).ToList();
+                var attraction=await _context.MasterAttractions
+                    .Where(x=>!x.IsDeleted && attractionIds.Contains(x.Id))
+                    .ToListAsync();
+                if(attraction.Any())
+                {
+                    foreach (var item in data)
+                    {
+                        item.Remark = attraction.Find(x => x.Id == item.ModuleId)?.EnDescription ?? string.Empty;
+                    }
+                }
+                }
+            return data;
         }
 
         public async Task<ImageStore> Update(ImageStore ImageStore)
