@@ -69,49 +69,18 @@ namespace AyodhyaYatra.API.Repository
                 .Where(x => !x.IsDeleted && x.Id == Id || x.BarcodeId == idorbarcodeId)
                 .FirstOrDefaultAsync();
         }
-        public async Task<List<MasterAttraction>> GetMasterAttractionByYatraId(int yatraId, bool includeAllChildYatraMasterAttraction = false)
+        public async Task<List<YatraAttractionMapper>> GetMasterAttractionByYatraId(int yatraId)
         {
             try
             {
-                var subYatra = await _context.YatraAttractionMappers.Where(x => x.YatraId == yatraId).ToListAsync();
-                var result = await _context.MasterAttractions
-                 .Where(x => !x.IsDeleted)
-                 .ToListAsync();
-                if (includeAllChildYatraMasterAttraction)
-                {
-                    var suYatraIds = subYatra.Select(x => x.Id).ToList();
-                    if (result.Count == 0 && subYatra.Count > 0)
-                    {
-                        result = await _context.MasterAttractions
-                    .Where(x => !x.IsDeleted)
-                    .ToListAsync();
-                    }
-                }
-                else
-                {
-                    if (result.Count == 0 && subYatra.Count > 0)
-                    {
-                        result = await _context.MasterAttractions
-                    .Where(x => !x.IsDeleted)
-                    .ToListAsync();
-                    }
-                }
-                if (yatraId == 11)
-                {
-                    var dic = result.ToDictionary(x => int.Parse(x.SequenceNo.Split("-")[1]), y => y);
-                    List<MasterAttraction> newResponse = new();
-                    for (int i = 0; i <= 150; i++)
-                    {
-                        if (dic.Keys.Contains(i))
-                            newResponse.Add(dic[i]);
-                    }
-                    return newResponse;
-                }
-                return result;
+                return await _context.YatraAttractionMappers
+                    .Include(x=>x.MasterYatra)
+                    .Include(x=>x.MasterAttraction)
+                    .Where(x => x.YatraId == yatraId && !x.IsDeleted).ToListAsync();
             }
             catch (Exception ex)
             {
-                return null;
+                return default;
             }
         }
         public async Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest)

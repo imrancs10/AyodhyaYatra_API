@@ -14,7 +14,7 @@ namespace AyodhyaYatra.API.Repository.IRepository
         Task<bool> DeleteMasterAttraction(int id);
         Task<MasterAttraction> GetMasterAttractionById(int id);
         Task<MasterAttraction> GetMasterAttractionById(string idorbarcodeId);
-        Task<List<MasterAttraction>> GetMasterAttractionByYatraId(int yatraId,bool includeAllChildYatraTemple=false);
+        Task<List<YatraAttractionMapper>> GetMasterAttractionByYatraId(int yatraId);
         Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest);
         Task<PagingResponse<MasterAttraction>> SearchMasterAttractions(SearchPagingRequest pagingRequest);
         Task<List<int>> GetTempleIds();

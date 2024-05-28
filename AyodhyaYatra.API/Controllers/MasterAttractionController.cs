@@ -50,9 +50,9 @@ namespace AyodhyaYatra.API.Controllers
         }
 
         [HttpGet(StaticValues.MasterAttractionGetByYatraIdPath)]
-        public async Task<List<MasterAttractionResponse>> GetMasterAttractionByYatraId([FromRoute] int yatraId, [FromQuery] bool includeAllChildYatraMasterAttraction = false)
+        public async Task<YatraAttractionResponse> GetMasterAttractionByYatraId([FromRoute] int yatraId)
         {
-            return await _MasterAttractionService.GetMasterAttractionByYatraId(yatraId,includeAllChildYatraMasterAttraction);
+            return await _MasterAttractionService.GetMasterAttractionByYatraId(yatraId);
         }
 
         [HttpGet(StaticValues.MasterAttractionPath)]

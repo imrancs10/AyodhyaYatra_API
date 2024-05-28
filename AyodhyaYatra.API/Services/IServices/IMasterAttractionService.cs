@@ -2,8 +2,6 @@
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
-using AyodhyaYatra.API.Models;
-using Microsoft.AspNetCore.Http;
 
 namespace AyodhyaYatra.API.Services.IServices
 {
@@ -19,7 +17,7 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<PagingResponse<MasterAttractionResponse>> SearchMasterAttractions(SearchPagingRequest pagingRequest);
         //Task<List<MasterAttractionCategoryResponse>> GetMasterAttractionCategory();
         
-        Task<List<MasterAttractionResponse>> GetMasterAttractionByYatraId(int yatraId, bool includeAllChildYatraMasterAttraction = false);
+        Task<YatraAttractionResponse> GetMasterAttractionByYatraId(int yatraId);
 
         Task<List<int>> GetMasterAttractionIds();
         Task<string> UpdateMasterAttractionFromExcel(IFormFile formFile);

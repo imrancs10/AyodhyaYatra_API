@@ -10,6 +10,7 @@ using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
 using AyodhyaYatra.API.Utility;
 using System.Data;
+using AyodhyaYatra.API.DTO.Response.MasterData;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -63,19 +64,25 @@ namespace AyodhyaYatra.API.Services
             }
             return response;
         }
-        public async Task<List<MasterAttractionResponse>> GetMasterAttractionByYatraId(int yatraId, bool includeAllChildYatraMasterAttraction = false)
+        public async Task<YatraAttractionResponse> GetMasterAttractionByYatraId(int yatraId)
         {
-            var res = _mapper.Map<List<MasterAttractionResponse>>(await _MasterAttractionRepository.GetMasterAttractionByYatraId(yatraId,includeAllChildYatraMasterAttraction));
+            var outRes = new YatraAttractionResponse();
+            var res = await _MasterAttractionRepository.GetMasterAttractionByYatraId(yatraId);
             if (res != null && res.Count > 0)
             {
-                var moduleIds = res.Select(x => x.Id).Distinct().ToList();
-                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, moduleIds, true));
-                foreach (var item in res)
+                outRes.Yatra = _mapper.Map<MasterResponse>(res.First().MasterYatra);
+                outRes.Attractions = _mapper.Map<List<MasterAttractionResponse>>(res.Select(x => x.MasterAttraction));
+                var attractionIds=res.Select(x=>x.MasterAttractionId).ToList();
+                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, attractionIds, true));
+                foreach (var item in outRes.Attractions)
                 {
                     item.Images = images.Where(x => x.ModuleId == item.Id).ToList();
                 }
+                attractionIds = new List<int>() { outRes.Yatra.Id };
+                var yatraImages = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.Yatra, attractionIds, true));
+                outRes.Yatra.Images = yatraImages;
             }
-            return res;
+            return outRes;
         }
 
         public async Task<PagingResponse<MasterAttractionResponse>> GetMasterAttractions(PagingRequest pagingRequest)
