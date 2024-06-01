@@ -17,7 +17,7 @@
         Cruise = 15,
         BoatRiding = 16,
         Heritage = 17,
-        GangaAarti = 18,
+        SaryuAarti = 18,
         Industries = 19,
         Museum = 20,
         Railways = 21,

@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AyodhyaYatra.API.Controllers
 {
-    [Route(StaticValues.APIPrefix)]
+    [Route("v1/")]
     [ApiController]
     public class MasterDataController : ControllerBase
     {
