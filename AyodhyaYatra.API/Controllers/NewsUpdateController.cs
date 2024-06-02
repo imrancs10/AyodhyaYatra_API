@@ -1,16 +1,7 @@
-﻿using AutoMapper;
-using AyodhyaYatra.API.Contants;
-using AyodhyaYatra.API.DTO.Request;
-using AyodhyaYatra.API.DTO.Request.Common;
+﻿using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.DTO.Request.NewsUpdate;
-using AyodhyaYatra.API.DTO.Response;
-using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.MasterData;
-using AyodhyaYatra.API.Enums;
-using AyodhyaYatra.API.Repository.IRepository;
-using AyodhyaYatra.API.Services;
 using AyodhyaYatra.API.Services.IServices;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AyodhyaYatra.API.Controllers

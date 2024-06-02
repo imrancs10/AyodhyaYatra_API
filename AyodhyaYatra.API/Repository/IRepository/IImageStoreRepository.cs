@@ -1,7 +1,7 @@
 ﻿using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Models;
 
-namespace AyodhyaYatra.API.Repository.IRepository
+namespace AyodhyaYatra.API.Repository
 {
     public interface IImageStoreRepository
     {

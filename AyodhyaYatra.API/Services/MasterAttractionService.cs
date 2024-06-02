@@ -1,16 +1,15 @@
 ﻿using AutoMapper;
-using Azure;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.Image;
+using AyodhyaYatra.API.DTO.Response.MasterData;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
 using AyodhyaYatra.API.Utility;
 using System.Data;
-using AyodhyaYatra.API.DTO.Response.MasterData;
 
 namespace AyodhyaYatra.API.Services
 {

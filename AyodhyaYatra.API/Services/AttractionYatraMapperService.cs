@@ -7,7 +7,6 @@ using AyodhyaYatra.API.DTO.Response.Image;
 using AyodhyaYatra.API.DTO.Response.Yatra;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository;
-using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
 
 namespace AyodhyaYatra.API.Services

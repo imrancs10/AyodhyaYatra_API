@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Azure.Core;
 using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.DTO.Request;
@@ -8,9 +7,7 @@ using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System.Runtime.InteropServices;
 
 namespace AyodhyaYatra.API.Repository
 {

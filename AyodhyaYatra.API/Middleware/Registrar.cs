@@ -1,10 +1,7 @@
-using AyodhyaYatra.API.Config;
 using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.Repositories;
 using AyodhyaYatra.API.Repository;
-using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services;
-using AyodhyaYatra.API.Services.Interfaces;
 using AyodhyaYatra.API.Services.IServices;
 using AyodhyaYatra.API.Utility;
 using Microsoft.EntityFrameworkCore;
@@ -31,6 +28,8 @@ namespace AyodhyaYatra.API.Middleware
                 .AddScoped<IFileUploadService, FileUploadService>()
                 .AddScoped<IVisitorRepository, VisitorRepository>()
                 .AddScoped<IVisitorService, VisitorService>()
+                .AddScoped<IMobileLogicService, MobileLogicService>()
+                .AddScoped<IMobileLogicRespository, MobileLogicRespository>()
                 .AddScoped<IMailService, MailService>()
                 .AddScoped<INewsUpdateService, NewsUpdateService>()
                 .AddScoped<IExcelReader, ExcelReader>()

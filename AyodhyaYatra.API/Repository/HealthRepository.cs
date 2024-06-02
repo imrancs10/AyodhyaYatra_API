@@ -1,9 +1,6 @@
 ﻿using AyodhyaYatra.API.Data;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using Microsoft.EntityFrameworkCore;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace SalehGarib.API.Repositories
 {

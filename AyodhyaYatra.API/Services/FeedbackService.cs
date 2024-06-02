@@ -1,23 +1,15 @@
 ﻿using AutoMapper;
-using Azure;
 using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.Data;
-using AyodhyaYatra.API.DTO.Request;
-using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.NewsUpdate;
-using AyodhyaYatra.API.DTO.Response;
-using AyodhyaYatra.API.DTO.Response.Common;
-using AyodhyaYatra.API.DTO.Response.Image;
+using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response.MasterData;
-using AyodhyaYatra.API.Enums;
+using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository;
-using AyodhyaYatra.API.Repository.IRepository;
 using AyodhyaYatra.API.Services.IServices;
 using Microsoft.EntityFrameworkCore;
-using AyodhyaYatra.API.DTO.Response.MasterAttraction;
-using AyodhyaYatra.API.DTO.Response.Visitor;
 
 namespace AyodhyaYatra.API.Services
 {

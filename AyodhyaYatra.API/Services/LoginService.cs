@@ -7,10 +7,7 @@ using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Extension;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
-using AyodhyaYatra.API.Services.Interfaces;
-using AyodhyaYatra.API.Services.IServices;
-using StackExchange.Redis;
+using AyodhyaYatra.API.Repository;
 
 namespace AyodhyaYatra.API.Services
 {

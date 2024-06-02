@@ -4,10 +4,7 @@ using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.EntityFrameworkCore;
-using System.Linq;
 
 namespace AyodhyaYatra.API.Repository
 {

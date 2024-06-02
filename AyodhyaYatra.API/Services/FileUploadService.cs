@@ -1,22 +1,14 @@
 using AutoMapper;
-using Azure.Core;
 using AyodhyaYatra.API.Contants;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Response.Image;
 using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Drawing2D;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AyodhyaYatra.API.Services
 {

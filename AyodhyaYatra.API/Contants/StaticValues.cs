@@ -78,6 +78,10 @@
         public const string FileDeleteImageByIdPath = "image/delete/id";
         #endregion
 
+        #region Mobile API
+        public const string MobileAttractionPath = "mobile/master/attractions";
+        #endregion
+
         #endregion
 
         #region Error Type Message

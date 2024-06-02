@@ -3,7 +3,7 @@ using AyodhyaYatra.API.DTO.Request.Visitor;
 using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.Models;
 
-namespace AyodhyaYatra.API.Services.IServices
+namespace AyodhyaYatra.API.Services
 {
     public interface IVisitorService
     {

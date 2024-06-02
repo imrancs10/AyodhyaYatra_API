@@ -3,7 +3,7 @@ using AyodhyaYatra.API.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace AyodhyaYatra.API.Repository.IRepository
+namespace AyodhyaYatra.API.Repository
 {
     public interface IFileStorageRepository
     {

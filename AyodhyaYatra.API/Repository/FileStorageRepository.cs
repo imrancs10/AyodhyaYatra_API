@@ -1,13 +1,9 @@
 ﻿using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AyodhyaYatra.API.Repositories
 {
