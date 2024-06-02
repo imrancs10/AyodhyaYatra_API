@@ -107,7 +107,16 @@ namespace AyodhyaYatra.API.Services
              .Where(x => !x.IsDeleted && x.Id == Id)
              .OrderBy(x => x.NewsUpdateType)
              .FirstOrDefaultAsync();
-            return _mapper.Map<NewsUpdateResponse>(result);
+            var res = _mapper.Map<NewsUpdateResponse>(result);
+            if (res != null)
+            {
+                var moduleIds = res.Id;
+                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.NewsUpdate, moduleIds, "image"));
+                res.Images = images.Where(x => x.ModuleId == moduleIds).ToList();
+            }
+            res.MasterDataTypeName = res.MasterDataType.ToString();
+            res.NewsUpdateTypeName = res.NewsUpdateType.ToString();
+            return res;
         }
 
         #endregion
