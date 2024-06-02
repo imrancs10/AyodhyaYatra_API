@@ -2,7 +2,7 @@
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Models;
 
-namespace AyodhyaYatra.API.Repository.IRepository
+namespace AyodhyaYatra.API.Repository
 {
     public interface IMasterAttractionTypeRepository
     {

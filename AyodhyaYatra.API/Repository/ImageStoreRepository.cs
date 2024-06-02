@@ -2,9 +2,7 @@
 using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection;
 
 namespace AyodhyaYatra.API.Repository
 {

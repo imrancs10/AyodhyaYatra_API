@@ -4,11 +4,8 @@ using AyodhyaYatra.API.DTO.Request.MasterAttraction;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.DTO.Response.MasterAttraction;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using Org.BouncyCastle.Ocsp;
-using System.Collections.Generic;
 
 namespace AyodhyaYatra.API.Services
 {

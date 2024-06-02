@@ -5,12 +5,8 @@ using AyodhyaYatra.API.DTO.Response.Image;
 using AyodhyaYatra.API.Enums;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
+using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Tasks;
 
 namespace AyodhyaYatra.API.Services
 {

@@ -3,8 +3,7 @@ using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.Visitor;
 using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
-using AyodhyaYatra.API.Services.IServices;
+using AyodhyaYatra.API.Repository;
 
 namespace AyodhyaYatra.API.Services
 {

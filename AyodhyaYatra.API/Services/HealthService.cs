@@ -1,9 +1,5 @@
-﻿using AyodhyaYatra.API.Repository.IRepository;
+﻿using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace AyodhyaYatra.API.Services
 {

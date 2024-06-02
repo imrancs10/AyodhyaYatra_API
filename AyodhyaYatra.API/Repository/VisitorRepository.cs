@@ -3,9 +3,6 @@ using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
-using DocumentFormat.OpenXml.Office2010.Excel;
-using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 using System.Text.RegularExpressions;
 

@@ -2,7 +2,7 @@
 using AyodhyaYatra.API.Constants;
 using System.Threading.Tasks;
 
-namespace AyodhyaYatra.API.Services.Interfaces
+namespace AyodhyaYatra.API.Services
 {
     public interface IMailService
     {

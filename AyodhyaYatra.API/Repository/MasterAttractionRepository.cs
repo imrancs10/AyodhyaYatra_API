@@ -2,12 +2,9 @@
 using AyodhyaYatra.API.Data;
 using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.Common;
-using AyodhyaYatra.API.DTO.Response;
 using AyodhyaYatra.API.DTO.Response.Common;
 using AyodhyaYatra.API.Exceptions;
 using AyodhyaYatra.API.Models;
-using AyodhyaYatra.API.Repository.IRepository;
-using Microsoft.AspNetCore.Routing.Template;
 using Microsoft.EntityFrameworkCore;
 
 namespace AyodhyaYatra.API.Repository

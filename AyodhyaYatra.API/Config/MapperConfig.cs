@@ -76,6 +76,12 @@ namespace AyodhyaYatra.API.Config
             CreateMap<MasterAttractionTypeRequest, MasterAttractionType>();
             CreateMap<MasterAttractionType, MasterAttractionTypeResponse>();
             CreateMap<PagingResponse<MasterAttractionType>, PagingResponse<MasterAttractionTypeResponse>>();
+            CreateMap<MasterAttraction, AttractionMobileResponse>()
+                .ForMember(des => des.AttracrionType, src => src.MapFrom(x => x.MasterAttractionType.Name))
+                .ForMember(des => des.Value, src => src.MapFrom(x => x.EnName))
+                .ForMember(des => des.HiValue, src => src.MapFrom(x => x.HiName))
+                .ForMember(des => des.TeValue, src => src.MapFrom(x => x.TeName))
+                .ForMember(des => des.TaValue, src => src.MapFrom(x => x.TaName));
             #endregion
 
             #region Yatra

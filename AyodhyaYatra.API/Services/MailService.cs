@@ -1,14 +1,10 @@
-﻿using MailKit.Net.Smtp;
-using MailKit.Security;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Options;
-using MimeKit;
-using AyodhyaYatra.API.Constants;
+﻿using AyodhyaYatra.API.Constants;
 using AyodhyaYatra.API.Dto;
 using AyodhyaYatra.API.Dto.Request;
-using AyodhyaYatra.API.Services.Interfaces;
-using System.IO;
-using System.Threading.Tasks;
+using MailKit.Net.Smtp;
+using MailKit.Security;
+using Microsoft.Extensions.Options;
+using MimeKit;
 
 namespace AyodhyaYatra.API.Services
 {
