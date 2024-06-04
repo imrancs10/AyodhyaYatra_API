@@ -138,7 +138,7 @@ namespace AyodhyaYatra.API.Services
                 fs.Close();
             }
             Bitmap bitmap = new Bitmap(img);
-            System.Drawing.Image resizedImage = ResizeImage(bitmap, new System.Drawing.Size(100, 100));
+            System.Drawing.Image resizedImage = ResizeImage(bitmap, new System.Drawing.Size(250, 250));
             resizedImage.Save(Path.Combine(basePath, "thumb_" + fileName));
         }
 
