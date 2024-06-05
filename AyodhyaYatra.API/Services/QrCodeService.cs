@@ -34,12 +34,12 @@ namespace AyodhyaYatra.API.Services
 
         public async Task<bool> GenerateMasterAttractionQrCode()
         {
-            var templeIds = await _templeService.GetMasterAttractionIds();
+            var attractionIds = await _templeService.GetMasterAttractionIds();
             string qrCodeUrl = _configuration.GetSection("QrCodeUrlBasePath").Value;
-            foreach (var templeId in templeIds)
+            foreach (var attractionId in attractionIds)
             {
-                var qrCodeFileName = $"TempleId-{templeId}";
-                GenerateQrCode(qrCodeUrl + templeId, qrCodeFileName);
+                var qrCodeFileName = $"AttractionId-{attractionId}";
+                GenerateQrCode(qrCodeUrl + attractionId, qrCodeFileName);
             }
           
             return default(bool);

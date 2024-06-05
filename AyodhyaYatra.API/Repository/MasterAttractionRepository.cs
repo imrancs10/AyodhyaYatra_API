@@ -215,10 +215,6 @@ namespace AyodhyaYatra.API.Repository
             throw new NotImplementedException();
         }
 
-        public Task<List<int>> GetTempleIds()
-        {
-            throw new NotImplementedException();
-        }
         //public async Task<List<MasterAttractionCategory>> GetMasterAttractionCategory()
         //{
         //    try

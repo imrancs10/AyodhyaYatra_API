@@ -17,7 +17,7 @@ namespace AyodhyaYatra.API.Repository
         Task<List<YatraAttractionMapper>> GetMasterAttractionByYatraId(int yatraId);
         Task<PagingResponse<MasterAttraction>> GetMasterAttractions(PagingRequest pagingRequest);
         Task<PagingResponse<MasterAttraction>> SearchMasterAttractions(SearchPagingRequest pagingRequest);
-        Task<List<int>> GetTempleIds();
+        Task<List<int>> GetMasterAttractionIds();
 
         Task<List<MasterAttraction>> GetMasterAttractionByTypeId(int typeId);
         //Task<List<TempleCategory>> GetTempleCategory();

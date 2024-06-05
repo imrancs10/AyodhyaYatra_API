@@ -136,7 +136,7 @@ namespace AyodhyaYatra.API.Services
 
         public async Task<List<int>> GetMasterAttractionIds()
         {
-            return default;
+           return await _MasterAttractionRepository.GetMasterAttractionIds();
         }
 
         public async Task<string> UpdateMasterAttractionFromExcel(IFormFile file)
