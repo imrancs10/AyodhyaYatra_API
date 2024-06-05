@@ -39,7 +39,7 @@ namespace AyodhyaYatra.API.Repositories
             {
                 return await _context.ImageStores
                     .Where(fs => moduleIds.Contains(fs.ModuleId) && fs.ModuleName.Equals(moduleName.ToString()))
-                    .OrderByDescending(x=>x.CreatedAt)
+                    .OrderByDescending(x => x.CreatedAt)
                     .ToListAsync();
             }
             catch (Exception)
@@ -50,23 +50,65 @@ namespace AyodhyaYatra.API.Repositories
 
         public async Task<List<ImageStore>> GetByModuleName(ModuleNameEnum moduleName)
         {
-            var data= await _context.ImageStores
+            var data = await _context.ImageStores
                 .Where(fs => fs.ModuleName.Equals(moduleName.ToString()))
                 .ToListAsync();
-            if(moduleName==ModuleNameEnum.MasterAttraction)
+            if (moduleName == ModuleNameEnum.MasterAttraction)
             {
-                var attractionIds=data.Select(x=>x.ModuleId).ToList();
-                var attraction=await _context.MasterAttractions
-                    .Where(x=>!x.IsDeleted && attractionIds.Contains(x.Id))
+                var attractionIds = data.Select(x => x.ModuleId).ToList();
+                var attraction = await _context.MasterAttractions
+                    .Where(x => !x.IsDeleted && attractionIds.Contains(x.Id))
                     .ToListAsync();
-                if(attraction.Any())
+                if (attraction.Any())
                 {
                     foreach (var item in data)
                     {
                         item.Remark = attraction.Find(x => x.Id == item.ModuleId)?.EnDescription ?? string.Empty;
                     }
                 }
+            }
+            if (moduleName == ModuleNameEnum.AudioGallery)
+            {
+                var attractionIds = data.Select(x => x.ModuleId).ToList();
+                var attraction = await _context.AudioGallery
+                    .Where(x => !x.IsDeleted && attractionIds.Contains(x.Id))
+                    .ToListAsync();
+                if (attraction.Any())
+                {
+                    foreach (var item in data)
+                    {
+                        item.Remark = attraction.Find(x => x.Id == item.ModuleId)?.EnName ?? string.Empty;
+                    }
                 }
+            }
+            if (moduleName == ModuleNameEnum.VideoGallery)
+            {
+                var attractionIds = data.Select(x => x.ModuleId).ToList();
+                var attraction = await _context.VideoGallery
+                    .Where(x => !x.IsDeleted && attractionIds.Contains(x.Id))
+                    .ToListAsync();
+                if (attraction.Any())
+                {
+                    foreach (var item in data)
+                    {
+                        item.Remark = attraction.Find(x => x.Id == item.ModuleId)?.EnName ?? string.Empty;
+                    }
+                }
+            }
+            if (moduleName == ModuleNameEnum.ThreeSixtyDegreeGallery)
+            {
+                var attractionIds = data.Select(x => x.ModuleId).ToList();
+                var attraction = await _context.ThreeSixtyDegreeGallery
+                    .Where(x => !x.IsDeleted && attractionIds.Contains(x.Id))
+                    .ToListAsync();
+                if (attraction.Any())
+                {
+                    foreach (var item in data)
+                    {
+                        item.Remark = attraction.Find(x => x.Id == item.ModuleId)?.EnName ?? string.Empty;
+                    }
+                }
+            }
             return data;
         }
 
