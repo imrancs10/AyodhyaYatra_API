@@ -106,6 +106,48 @@ namespace AyodhyaYatra.API.Repository
             return data;
         }
 
+        public async Task<List<MasterAttraction>> GetSpecificMasterAttraction()
+        {
+            var data = new List<MasterAttraction>();
+            //temple
+            var dataTemple = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == 10 && x.Id == 133)
+              .ToListAsync();
+
+            //Bhawan
+            var dataBhawan = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == 4)
+              .Take(1)
+              .ToListAsync();
+
+            //kund
+            var dataKund = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == 3)
+              .Take(1)
+              .ToListAsync();
+
+            //Ashram
+            var dataAshram = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == 5)
+              .Take(1)    
+              .ToListAsync();
+
+            //Ghat
+            var dataGhat = await _context.MasterAttractions
+                .Include(x => x.MasterAttractionType)
+              .Where(x => !x.IsDeleted && x.AttractionTypeId == 2)
+              .Take(1)
+              .ToListAsync();
+
+            data = dataTemple.Union(dataGhat).Union(dataAshram).Union(dataKund).Union(dataBhawan).ToList();
+
+            return data;
+        }
+
         public async Task<PagingResponse<MasterAttraction>> SearchMasterAttractions(SearchPagingRequest pagingRequest)
         {
             var data = await _context.MasterAttractions

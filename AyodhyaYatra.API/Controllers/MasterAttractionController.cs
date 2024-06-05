@@ -140,5 +140,11 @@ namespace AyodhyaYatra.API.Controllers
         {
             return await _MasterAttractionTypeService.Delete(id);
         }
+
+        [HttpGet(StaticValues.SpecificMasterAttractionPath)]
+        public async Task<List<MasterAttractionResponse>> GetSpecificMasterAttraction()
+        {
+            return await _MasterAttractionService.GetSpecificMasterAttraction();
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace AyodhyaYatra.API.Repository
         Task<List<int>> GetMasterAttractionIds();
 
         Task<List<MasterAttraction>> GetMasterAttractionByTypeId(int typeId);
+        Task<List<MasterAttraction>> GetSpecificMasterAttraction();
         //Task<List<TempleCategory>> GetTempleCategory();
 
     }

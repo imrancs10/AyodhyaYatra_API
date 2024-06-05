@@ -24,5 +24,7 @@ namespace AyodhyaYatra.API.Services.IServices
 
         Task<List<MasterAttractionResponse>> GetMasterAttractionByTypeId(int typeId);
 
+        Task<List<MasterAttractionResponse>> GetSpecificMasterAttraction();
+
     }
 }

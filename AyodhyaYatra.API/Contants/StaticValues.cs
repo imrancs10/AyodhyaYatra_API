@@ -46,6 +46,7 @@
         public const string GenerateMasterAttractionQrCodePath = "master/attraction/generate/qr/code";
         public const string MasterAttractionUpdateFromExcelPath = "master/attraction/update/excel";
         public const string MasterAttractionGetByIdOrBarcodeIdPath = "master/attraction/get/by/id/barcode";
+        public const string SpecificMasterAttractionPath = "master/attraction/get";
 
         public const string MasterAttractionTypePath = "master/attraction/type";
         public const string MasterAttractionTypeSearchPath = "master/attraction/type/search";
