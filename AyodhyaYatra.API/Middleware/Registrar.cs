@@ -32,6 +32,7 @@ namespace AyodhyaYatra.API.Middleware
                 .AddScoped<IMobileLogicRespository, MobileLogicRespository>()
                 .AddScoped<IMailService, MailService>()
                 .AddScoped<INewsUpdateService, NewsUpdateService>()
+                .AddScoped<ICharityRepository, CharityRepository>()
                 .AddScoped<IExcelReader, ExcelReader>()
                 .AddScoped<IQrCodeService, QrCodeService>()
                 .AddScoped<IGalleryService, GalleryService>()

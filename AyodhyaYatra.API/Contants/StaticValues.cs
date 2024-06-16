@@ -35,6 +35,14 @@
 
         #endregion
 
+        #region Charity
+        public const string CharityPath = APIPrefix;
+        public const string CharityGetByIdPath = APIPrefix+"/get/by/id/{id}";
+        public const string CharityMasterPath = APIPrefix+"/master";
+        public const string CharityMasterGetByIdPath = APIPrefix + "/master/get/by/id/{id}";
+
+        #endregion
+
         #region Master Attraction
         public const string MasterAttractionPath = "master/attraction";
         public const string MasterAttractionGetByIdPath = "master/attraction/get/{id}";

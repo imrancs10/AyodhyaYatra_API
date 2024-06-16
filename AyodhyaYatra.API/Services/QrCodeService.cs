@@ -23,7 +23,7 @@ namespace AyodhyaYatra.API.Services
             var fullFilePath = Path.Combine(basePath, fileName+".png");
 
             if (File.Exists(fullFilePath))
-                return;
+                File.Delete(fullFilePath);
 
             QRCodeGenerator QrGenerator = new();
             QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(qrCodeText, QRCodeGenerator.ECCLevel.Q);

@@ -146,6 +146,16 @@ namespace AyodhyaYatra.API.Config
             CreateMap<ThreeSixtyDegreeGalleryRequest, ThreeSixtyDegreeGallery>();
             CreateMap<ThreeSixtyDegreeGallery, ThreeSixtyDegreeGalleryResponse>();
             #endregion
+
+            #region Charity
+            CreateMap<Charity, CharityResponse>();
+            CreateMap<PagingResponse<Charity>, PagingResponse<CharityResponse>>();
+            CreateMap<CharityRequest, Charity>();
+
+            CreateMap<CharityMasterData, CharityMasterDataResponse>();
+            CreateMap<PagingResponse<CharityMasterData>, PagingResponse<CharityMasterDataResponse>>();
+            CreateMap<CharityMasterDataRequest, CharityMasterData>();
+            #endregion
         }
 
         public static IMapper GetMapperConfig()

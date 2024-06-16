@@ -41,7 +41,8 @@ namespace AyodhyaYatra.API.Data
         public DbSet<PhotoAlbum> PhotoAlbum { get; set; }
         public DbSet<Feedback> Feedbacks { get; set; }
         public DbSet<VisitorDocumentType> VisitorDocumentTypes { get; set; }
-
+        public DbSet<Charity> Charities { get; set; }
+        public DbSet<CharityMasterData> CharityMasterDatas { get; set; }
         public DbSet<Visitor> Visitors { get; set; }
 
         public override int SaveChanges()
