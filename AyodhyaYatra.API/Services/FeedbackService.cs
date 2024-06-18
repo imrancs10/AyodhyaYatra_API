@@ -63,6 +63,7 @@ namespace AyodhyaYatra.API.Services
             {
                 RegistrationCount = await _context.Visitors.Where(x => !x.IsDeleted).CountAsync(),
                 YatraCount = await _context.MasterYatras.Where(x => !x.IsDeleted).CountAsync(),
+                CharityCount = await _context.Charities.Where(x => !x.IsDeleted).CountAsync(),
                 AttractionCounts = await _context.MasterAttractions
                 .Include(x => x.MasterAttractionType)
                 .Where(x => !x.IsDeleted)

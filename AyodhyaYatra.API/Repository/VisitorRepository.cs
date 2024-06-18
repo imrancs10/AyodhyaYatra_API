@@ -41,7 +41,7 @@ namespace AyodhyaYatra.API.Repository
                 {
                     case "Numeric":
                         regex = new(@"^\d$");
-                        if(!regex.IsMatch(visitor.DocumentNumber))
+                        if(!IsDigitsOnly(visitor.DocumentNumber))
                             throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
                         break;
                     case "AlphaNumeric":
@@ -102,6 +102,17 @@ namespace AyodhyaYatra.API.Repository
            return await _context.Visitors
                 .Where(x=>!x.IsDeleted && (month==0 || x.RegistrationDate.Month==month) && (year == 0 || x.RegistrationDate.Year == year))
                 .CountAsync();
+        }
+
+        private bool IsDigitsOnly(string str)
+        {
+            foreach (char c in str)
+            {
+                if (c < '0' || c > '9')
+                    return false;
+            }
+
+            return true;
         }
     }
 }

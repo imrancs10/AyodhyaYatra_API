@@ -7,6 +7,7 @@ namespace AyodhyaYatra.API.DTO.Response.MasterData
     public class DashboardResponse : BaseResponse
     {
         public int YatraCount { get; set; }
+        public int CharityCount { get; set; }
         public int RegistrationCount { get; set; }
         public List<MonthlyVisitorCountResponse>? MonthlyVisitorCounts { get; set; }
 

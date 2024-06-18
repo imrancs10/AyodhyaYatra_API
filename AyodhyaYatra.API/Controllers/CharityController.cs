@@ -89,7 +89,7 @@ namespace AyodhyaYatra.API.Controllers
         [HttpGet(StaticValues.CharityPath)]
         public async Task<PagingResponse<CharityResponse>> GetAllCharity([FromQuery] PagingRequest request)
         {
-            return _mapper.Map<PagingResponse<CharityResponse>>(await _charityRepository.GetAllCharityDataType(request));
+            return _mapper.Map<PagingResponse<CharityResponse>>(await _charityRepository.GetAllCharity(request));
         }
 
         [ProducesResponseType(typeof(PagingResponse<CharityMasterDataResponse>), 200)]
