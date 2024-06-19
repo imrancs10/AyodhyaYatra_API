@@ -76,6 +76,13 @@ namespace AyodhyaYatra.API.Repository
             return await _context.Visitors.Where(x => !x.IsDeleted).ToListAsync();
         }
 
+        public async Task<Visitor> GetVisitor(int id)
+        {
+            return await _context.Visitors
+                .Include(x=>x.VisitorDocumentType)
+                .Where(x => !x.IsDeleted && x.Id==id).FirstOrDefaultAsync();
+        }
+
         public async Task<bool> UpdateDocumentType(VisitorDocumentType documentType)
         {
             var entity = await _context.VisitorDocumentTypes.Where(x => !x.IsDeleted && x.Id == documentType.Id).FirstOrDefaultAsync() ?? throw new BusinessRuleViolationException(StaticValues.ErrorType_RecordNotFound, StaticValues.Error_RecordNotFound);

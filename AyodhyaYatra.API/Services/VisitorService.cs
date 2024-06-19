@@ -22,10 +22,12 @@ namespace AyodhyaYatra.API.Services
             return await _visitorRepository.AddDocumentType(documentType);
         }
 
-        public async Task<int> AddVisitor(VisitorRequest visitorReq)
+        public async Task<VisitorResponse> AddVisitor(VisitorRequest visitorReq)
         {
             var visitor = _mapper.Map<Visitor>(visitorReq);
-            return await _visitorRepository.AddVisitor(visitor);
+            var visitorId=await _visitorRepository.AddVisitor(visitor);
+
+            return _mapper.Map<VisitorResponse>(await _visitorRepository.GetVisitor(visitorId));
         }
 
         public async Task<bool> DeleteDocumentType(int id)

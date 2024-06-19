@@ -11,6 +11,7 @@ namespace AyodhyaYatra.API.Repository
         Task<List<VisitorDocumentType>> GetsDocumentType();
 
         Task<int> AddVisitor(Visitor visitor);
+        Task<Visitor> GetVisitor(int id);
         Task<List<Visitor>> GetsVisitors(PagingRequest pagingRequest);
         Task<int> VisitorCount(int month,int year);
     }

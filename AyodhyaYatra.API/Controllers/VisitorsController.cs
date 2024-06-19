@@ -3,7 +3,11 @@ using AyodhyaYatra.API.DTO.Request.Common;
 using AyodhyaYatra.API.DTO.Request.Visitor;
 using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.Services;
+using AyodhyaYatra.API.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
+using QRCoder;
+using System.Drawing;
+using System.Text.Json;
 
 namespace AyodhyaYatra.API.Controllers
 {
@@ -24,9 +28,12 @@ namespace AyodhyaYatra.API.Controllers
         }
 
         [HttpPut(StaticValues.VisitorAddPath)]
-        public async Task<int> AddVisitor([FromBody] VisitorRequest visitor)
+        public async Task<VisitorResponse> AddVisitor([FromBody] VisitorRequest visitor)
         {
-            return await _visitorService.AddVisitor(visitor);
+            var resp= await _visitorService.AddVisitor(visitor);
+            var respJson= JsonSerializer.Serialize(resp);
+            resp.QrImage =  GenerateQrCodeBytes(respJson);
+            return resp;
         }
 
         [HttpDelete(StaticValues.VisitorDeleteDocTypePath)]
@@ -57,6 +64,17 @@ namespace AyodhyaYatra.API.Controllers
         public async Task<int> VisitorCount([FromQuery] int month,[FromQuery] int year)
         {
             return await _visitorService.VisitorCount(month, year);
+        }
+
+        private static byte[] GenerateQrCodeBytes(string content)
+        {
+            using var qrGenerator = new QRCodeGenerator();
+            var qrCodeData = qrGenerator.CreateQrCode(content, QRCodeGenerator.ECCLevel.Q);
+            var qrCode = new QRCode(qrCodeData);
+            using var bitmap = qrCode.GetGraphic(20);
+            using var stream = new MemoryStream();
+            bitmap.Save(stream, System.Drawing.Imaging.ImageFormat.Png);
+            return stream.ToArray();
         }
     }
 }
