@@ -85,6 +85,7 @@
         public const string FileGetImageByModNameModIdSeqPath = "image/get/modname/id/seq";
         public const string FileGetImageByModNamePagingPath = "image/get/modname/paging";
         public const string FileDeleteImageByIdPath = "image/delete/id";
+        public const string FileDeleteExistingThumbAndGenerateNewThumbPath = "image/delete/exist/generate/new/thumb";
         #endregion
 
         #region Mobile API

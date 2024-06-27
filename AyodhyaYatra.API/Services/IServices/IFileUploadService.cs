@@ -11,5 +11,7 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<string> UploadDesignSamplePhoto(IFormFile files, int sampleId);
         Task<List<ImageStoreResponse>> UploadPhoto(List<FileUploadRequest> fileUploadRequest);
         Task<bool> DeleteFile(int id);
+
+        bool DeleteExistingThumbAndGenerateNewThumb();
     }
 }

@@ -9,6 +9,8 @@ using AyodhyaYatra.API.Repository;
 using AyodhyaYatra.API.Services.IServices;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Drawing.Imaging;
+using Image = System.Drawing.Image;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -17,7 +19,7 @@ namespace AyodhyaYatra.API.Services
         private readonly IConfiguration _configuration;
         private readonly IFileStorageRepository _fileStorageRepository;
         private readonly IMapper _mapper;
-        private readonly IImageStoreRepository _imageStoreRepository;  
+        private readonly IImageStoreRepository _imageStoreRepository;
 
         public FileUploadService(IConfiguration configuration, IFileStorageRepository fileStorageRepository, IMapper mapper, IImageStoreRepository imageStoreRepository)
         {
@@ -144,7 +146,7 @@ namespace AyodhyaYatra.API.Services
 
         public async Task<List<ImageStoreResponse>> UploadPhoto(List<FileUploadRequest> requests)
         {
-            if (requests.Count==0)
+            if (requests.Count == 0)
                 throw new NotFoundException(StaticValues.ErrorType_ImageNotSelected, StaticValues.Error_ImageNotSelected);
 
             List<ImageStore> images = new();
@@ -174,24 +176,24 @@ namespace AyodhyaYatra.API.Services
                 thumbPath += string.Concat("thumb_", absoluteFilePath.AsSpan(absoluteFilePath.LastIndexOf("\\") + 1));
                 images.Add(new ImageStore()
                 {
-                    FilePath= absoluteFilePath,
-                    ModuleId=request.ModuleId,
+                    FilePath = absoluteFilePath,
+                    ModuleId = request.ModuleId,
                     FileType = request.FileType,
-                    ModuleName=request.ModuleName.ToString(),
-                    ThumbPath=thumbPath,
-                    Remark=request.Remark??string.Empty
+                    ModuleName = request.ModuleName.ToString(),
+                    ThumbPath = thumbPath,
+                    Remark = request.Remark ?? string.Empty
                 });
             }
-            
-           return _mapper.Map<List<ImageStoreResponse>>(await _fileStorageRepository.Add(images));
+
+            return _mapper.Map<List<ImageStoreResponse>>(await _fileStorageRepository.Add(images));
         }
 
         public async Task<bool> DeleteFile(int id)
         {
-            var res=await _imageStoreRepository.DeleteFile(id);
+            var res = await _imageStoreRepository.DeleteFile(id);
             if (res == null) return false;
 
-            var filePath= Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", res.FilePath);
+            var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", res.FilePath);
             var thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", res.ThumbPath);
             if (File.Exists(filePath))
             {
@@ -203,6 +205,71 @@ namespace AyodhyaYatra.API.Services
             }
             return true;
 
+        }
+
+        public bool DeleteExistingThumbAndGenerateNewThumb()
+        {
+            string? ImagePath = _configuration.GetSection("ImagePath").Value;
+            var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", ImagePath);
+
+            if (string.IsNullOrEmpty(folderPath) || !Directory.Exists(folderPath))
+            {
+                Console.WriteLine("Invalid folder path.");
+                return false;
+            }
+
+            // Delete all images that contain "thumb" in their name
+            var filesToDelete = Directory.GetFiles(folderPath, "*thumb*.*");
+            foreach (var file in filesToDelete)
+            {
+                try
+                {
+                    File.Delete(file);
+                    Console.WriteLine($"Deleted: {file}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error deleting file {file}: {ex.Message}");
+                }
+            }
+
+            // Scan all other images
+            var imageFiles = Directory.GetFiles(folderPath)
+                                       .Where(f => !f.Contains("thumb") && IsImage(f))
+                                       .ToList();
+
+            foreach (var imageFile in imageFiles)
+            {
+                try
+                {
+                    using var image = Image.FromFile(imageFile);
+                    // Create a thumbnail
+                    var thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
+                    var thumbPath = Path.Combine(folderPath, "thumb_" + Path.GetFileName(imageFile));
+
+                    // Save the thumbnail
+                    thumb.Save(thumbPath, ImageFormat.Jpeg);
+                    Console.WriteLine($"Created thumbnail: {thumbPath}");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Error processing image {imageFile}: {ex.Message}");
+                }
+            }
+            return true;
+        }
+
+        private static bool IsImage(string filePath)
+        {
+            try
+            {
+                using var img = Image.FromFile(filePath);
+                return true;
+            }
+            catch (OutOfMemoryException)
+            {
+                return false;
+            }
         }
     }
 }

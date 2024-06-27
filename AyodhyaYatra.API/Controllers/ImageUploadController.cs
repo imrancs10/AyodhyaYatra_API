@@ -99,5 +99,15 @@ namespace AyodhyaYatra.API.Controllers
         {
             return await _fileService.DeleteFile(id);
         }
+        
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status503ServiceUnavailable)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
+        [HttpGet(StaticValues.FileDeleteExistingThumbAndGenerateNewThumbPath)]
+        public bool DeleteExistingThumbAndGenerateNewThumb()
+        {
+            return _fileService.DeleteExistingThumbAndGenerateNewThumb();
+        }
     }
 }
