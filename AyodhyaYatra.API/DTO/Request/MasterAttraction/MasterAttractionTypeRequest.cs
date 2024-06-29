@@ -8,5 +8,6 @@
         public string HiName { get; set; }
         public string TaName { get; set; }
         public string TeName { get; set; }
+        public string? Description { get; set; }
     }
 }

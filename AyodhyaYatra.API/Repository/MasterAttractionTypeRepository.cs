@@ -13,7 +13,7 @@ namespace AyodhyaYatra.API.Repository
         private readonly AyodhyaYatraContext _context;
         public MasterAttractionTypeRepository(AyodhyaYatraContext context)
         {
-            _context=context;
+            _context = context;
         }
         public async Task<int> Add(MasterAttractionType masterAttractionType)
         {
@@ -91,6 +91,10 @@ namespace AyodhyaYatra.API.Repository
 
             data.Name = masterAttractionType.Name;
             data.Code = masterAttractionType.Code;
+            data.HiName = masterAttractionType.HiName;
+            data.TaName = masterAttractionType.TaName;
+            data.TeName = masterAttractionType.TeName;
+            data.Description = masterAttractionType.Description;
             _context.MasterAttractionTypes.Update(data);
             return await _context.SaveChangesAsync() > 0;
         }
