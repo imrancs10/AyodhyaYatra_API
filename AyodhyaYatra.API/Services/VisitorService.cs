@@ -45,6 +45,11 @@ namespace AyodhyaYatra.API.Services
             return _mapper.Map<List<VisitorResponse>>( await _visitorRepository.GetsVisitors(pagingRequest));
         }
 
+        public async Task<List<VisitorResponse>> GetVisitor(string mobileNo)
+        {
+            return _mapper.Map<List<VisitorResponse>>(await _visitorRepository.GetVisitor(mobileNo));
+        }
+
         public async Task<bool> UpdateDocumentType(VisitorDocumentTypeRequest documentTypeReq)
         {
             var documentType = _mapper.Map<VisitorDocumentType>(documentTypeReq);

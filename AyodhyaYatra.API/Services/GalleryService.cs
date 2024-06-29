@@ -301,12 +301,12 @@ namespace AyodhyaYatra.API.Services
         #region 360 Gallery
         public async Task<List<ThreeSixtyDegreeGalleryResponse>> GetThreeSixtyDegreeGallery()
         {
-            var result = await _context.ThreeSixtyDegreeGallery.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
+            var result = await _context.MasterAttractions.Where(x => !x.IsDeleted).OrderBy(x => x.EnName).ToListAsync();
             var res = _mapper.Map<List<ThreeSixtyDegreeGalleryResponse>>(result);
             if (res != null && res.Count > 0)
             {
                 var moduleIds = res.Select(x => x.Id).Distinct().ToList();
-                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.ThreeSixtyDegreeGallery, moduleIds, true));
+                var images = _mapper.Map<List<ImageStoreResponse>>(await _imageStoreRepository.GetImageStore(Enums.ModuleNameEnum.MasterAttraction, moduleIds, "360degreeimage"));
                 foreach (var item in res)
                 {
                     item.Images = images.Where(x => x.ModuleId == item.Id).ToList();

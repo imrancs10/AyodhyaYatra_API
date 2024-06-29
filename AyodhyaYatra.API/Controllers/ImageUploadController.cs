@@ -105,7 +105,7 @@ namespace AyodhyaYatra.API.Controllers
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ErrorResponse), StatusCodes.Status500InternalServerError)]
         [HttpGet(StaticValues.FileDeleteExistingThumbAndGenerateNewThumbPath)]
-        public bool DeleteExistingThumbAndGenerateNewThumb()
+        public bool DeleteExistingThumbAndGenerateNewThumb([FromQuery] int height=200,[FromQuery] int width=300)
         {
             return _fileService.DeleteExistingThumbAndGenerateNewThumb();
         }

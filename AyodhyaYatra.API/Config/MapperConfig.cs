@@ -72,6 +72,7 @@ namespace AyodhyaYatra.API.Config
                 .ForMember(des => des.AttractionType, src => src.MapFrom(x => x.MasterAttractionType.Name));
             CreateMap<PagingResponse<MasterAttraction>, PagingResponse<MasterAttractionResponse>>();
             CreateMap<MasterAttraction, MasterData>();
+            CreateMap<MasterAttraction, ThreeSixtyDegreeGalleryResponse>();
             CreateMap<PagingResponse<MasterData>, PagingResponse<MasterResponse>>();
             CreateMap<MasterAttractionTypeRequest, MasterAttractionType>();
             CreateMap<MasterAttractionType, MasterAttractionTypeResponse>();

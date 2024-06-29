@@ -73,6 +73,7 @@
         public const string VisitorDeleteDocTypePath = "visitors/delete/doctype/{id}";
         public const string VisitorGetDocTypePath = "visitors/get/doctype";
         public const string VisitorGetPath = "visitors/get";
+        public const string VisitorGetByMobilePath = "visitors/get/by/mobile";
         public const string VisitorGetCountPath = "visitors/get/count";
         public const string VisitorUpdateDocTypePath = "visitors/update/doctype";
         #endregion

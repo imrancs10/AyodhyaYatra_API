@@ -207,7 +207,7 @@ namespace AyodhyaYatra.API.Services
 
         }
 
-        public bool DeleteExistingThumbAndGenerateNewThumb()
+        public bool DeleteExistingThumbAndGenerateNewThumb(int height = 200, int width = 300)
         {
             string? ImagePath = _configuration.GetSection("ImagePath").Value;
             var folderPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", ImagePath);
@@ -244,7 +244,7 @@ namespace AyodhyaYatra.API.Services
                 {
                     using var image = Image.FromFile(imageFile);
                     // Create a thumbnail
-                    var thumb = image.GetThumbnailImage(200, 200, () => false, IntPtr.Zero);
+                    var thumb = image.GetThumbnailImage(width, height, () => false, IntPtr.Zero);
                     var thumbPath = Path.Combine(folderPath, "thumb_" + Path.GetFileName(imageFile));
 
                     // Save the thumbnail

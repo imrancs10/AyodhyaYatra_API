@@ -3,6 +3,7 @@ using AyodhyaYatra.API.DTO.Request;
 using AyodhyaYatra.API.DTO.Request.ImageStore;
 using AyodhyaYatra.API.DTO.Response.Image;
 using AyodhyaYatra.API.Enums;
+using Microsoft.AspNetCore.Mvc;
 
 namespace AyodhyaYatra.API.Services.IServices
 {
@@ -12,6 +13,6 @@ namespace AyodhyaYatra.API.Services.IServices
         Task<List<ImageStoreResponse>> UploadPhoto(List<FileUploadRequest> fileUploadRequest);
         Task<bool> DeleteFile(int id);
 
-        bool DeleteExistingThumbAndGenerateNewThumb();
+        bool DeleteExistingThumbAndGenerateNewThumb(int height = 200,int width=300);
     }
 }

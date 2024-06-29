@@ -54,6 +54,12 @@ namespace AyodhyaYatra.API.Controllers
            return await _visitorService.GetsVisitors(pagingRequest);
         }
 
+        [HttpGet(StaticValues.VisitorGetByMobilePath)]
+        public async Task<List<VisitorResponse>> GetsVisitors(string mobileNo)
+        {
+            return await _visitorService.GetVisitor(mobileNo);
+        }
+
         [HttpPost(StaticValues.VisitorUpdateDocTypePath)]
         public async Task<bool> UpdateDocumentType([FromBody]VisitorDocumentTypeRequest documentType)
         {
