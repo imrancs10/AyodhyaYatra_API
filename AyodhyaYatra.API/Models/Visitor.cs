@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AyodhyaYatra.API.Models
 {
@@ -16,6 +17,7 @@ namespace AyodhyaYatra.API.Models
         public int DocumentTypeId { get; set; }
         public DateTime RegistrationDate { get; set; }
         public DateTime VisitDate { get; set; }
+        public Guid UniqueId { get; set; }
 
         [ForeignKey("DocumentTypeId")]
         public VisitorDocumentType? VisitorDocumentType { get; set; }

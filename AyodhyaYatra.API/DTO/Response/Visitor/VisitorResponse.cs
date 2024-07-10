@@ -15,7 +15,8 @@
         public DateTime RegistrationDate { get; set; }
         public DateTime VisitDate { get; set; }
         public string DocumentType { get; set; }
+        public Guid UniqueId { get; set; }
 
-        public byte[] QrImage { get; set; }
+        public string? QrImage { get; set; }
     }
 }

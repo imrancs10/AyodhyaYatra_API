@@ -75,6 +75,7 @@
         public const string VisitorGetPath = "visitors/get";
         public const string VisitorGetByMobilePath = "visitors/get/by/mobile";
         public const string VisitorGetCountPath = "visitors/get/count";
+        public const string VisitorValidatePath = "visitors/get/validate";
         public const string VisitorUpdateDocTypePath = "visitors/update/doctype";
         #endregion
 

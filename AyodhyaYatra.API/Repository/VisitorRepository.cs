@@ -52,10 +52,14 @@ namespace AyodhyaYatra.API.Repository
                     default:
                         throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
                 }
+                visitor.UniqueId = Guid.NewGuid();
+                visitor.RegistrationDate= DateTime.Now;
+                var entity = _context.Add(visitor);
+                await _context.SaveChangesAsync();
+                return entity.Entity.Id;
             }
-            var entity = _context.Add(visitor);
-            await _context.SaveChangesAsync();
-            return entity.Entity.Id;
+            return 0;
+            
         }
 
         public async Task<bool> DeleteDocumentType(int id)
@@ -102,6 +106,11 @@ namespace AyodhyaYatra.API.Repository
             entity.Code = documentType.Code;
             _context.VisitorDocumentTypes.Update(entity);
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<Visitor?> ValidateVisitor(Guid uniqueId)
+        {
+            return await _context.Visitors.Where(x => x.UniqueId == uniqueId && !x.IsDeleted).FirstOrDefaultAsync();
         }
 
         public async Task<int> VisitorCount(int month, int year)

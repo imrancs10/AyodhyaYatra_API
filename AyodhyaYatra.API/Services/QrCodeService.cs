@@ -53,5 +53,26 @@ namespace AyodhyaYatra.API.Services
                 Directory.CreateDirectory(basePath);
             return basePath;
         }
+
+        public string GenerateVisitorQrCode(string qrCodeText, string fileName)
+        {
+            string? ImagePath = _configuration.GetSection("VisitorQrCodesPath").Value;
+            var absPath= Path.Combine(ImagePath, fileName + ".png");
+            var basePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", ImagePath);
+            if (!Directory.Exists(basePath))
+                Directory.CreateDirectory(basePath);
+
+            var fullFilePath = Path.Combine(basePath, fileName + ".png");
+
+            if (File.Exists(fullFilePath))
+                File.Delete(fullFilePath);
+
+            QRCodeGenerator QrGenerator = new();
+            QRCodeData QrCodeInfo = QrGenerator.CreateQrCode(qrCodeText, QRCodeGenerator.ECCLevel.Q);
+            QRCode qrCode = new(QrCodeInfo);
+            Bitmap QrBitmap = qrCode.GetGraphic(60);
+            QrBitmap.Save(fullFilePath, ImageFormat.Png);
+            return absPath;
+        }
     }
 }

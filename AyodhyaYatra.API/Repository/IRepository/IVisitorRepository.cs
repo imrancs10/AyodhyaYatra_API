@@ -15,5 +15,6 @@ namespace AyodhyaYatra.API.Repository
         Task<List<Visitor>> GetVisitor(string mobileNo);
         Task<List<Visitor>> GetsVisitors(PagingRequest pagingRequest);
         Task<int> VisitorCount(int month,int year);
+        Task<Visitor?> ValidateVisitor(Guid uniqueId);
     }
 }

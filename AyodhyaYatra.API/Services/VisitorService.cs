@@ -4,6 +4,8 @@ using AyodhyaYatra.API.DTO.Request.Visitor;
 using AyodhyaYatra.API.DTO.Response.Visitor;
 using AyodhyaYatra.API.Models;
 using AyodhyaYatra.API.Repository;
+using AyodhyaYatra.API.Services.IServices;
+using System.Text.Json;
 
 namespace AyodhyaYatra.API.Services
 {
@@ -11,10 +13,12 @@ namespace AyodhyaYatra.API.Services
     {
         private readonly IVisitorRepository _visitorRepository;
         private readonly IMapper _mapper;
-        public VisitorService(IVisitorRepository visitorRepository,IMapper mapper)
+        private readonly IQrCodeService _qrCodeService;
+        public VisitorService(IVisitorRepository visitorRepository,IMapper mapper,IQrCodeService qrCodeService)
         {
             _mapper = mapper;
             _visitorRepository = visitorRepository;
+            _qrCodeService = qrCodeService;
         }
         public async Task<int> AddDocumentType(VisitorDocumentTypeRequest documentTypeReq)
         {
@@ -27,7 +31,11 @@ namespace AyodhyaYatra.API.Services
             var visitor = _mapper.Map<Visitor>(visitorReq);
             var visitorId=await _visitorRepository.AddVisitor(visitor);
 
-            return _mapper.Map<VisitorResponse>(await _visitorRepository.GetVisitor(visitorId));
+            var visitorResponse= _mapper.Map<VisitorResponse>(await _visitorRepository.GetVisitor(visitorId));
+            var visitorJson=JsonSerializer.Serialize(visitorResponse);
+           
+            visitorResponse.QrImage = _qrCodeService.GenerateVisitorQrCode(visitorJson, visitorResponse.UniqueId.ToString());
+            return visitorResponse;
         }
 
         public async Task<bool> DeleteDocumentType(int id)
@@ -54,6 +62,11 @@ namespace AyodhyaYatra.API.Services
         {
             var documentType = _mapper.Map<VisitorDocumentType>(documentTypeReq);
             return await _visitorRepository.UpdateDocumentType(documentType);
+        }
+
+        public async Task<VisitorResponse> ValidateVisitor(Guid uniqueId)
+        {
+            return _mapper.Map<VisitorResponse>(await _visitorRepository.ValidateVisitor(uniqueId));
         }
 
         public async Task<int> VisitorCount(int month, int year)
