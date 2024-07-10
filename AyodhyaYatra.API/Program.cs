@@ -9,7 +9,6 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 using System.Text;
 using AyodhyaYatra.API.Dto;
-using Microsoft.Extensions.Configuration;
 
 var _policyName = "CorsPolicy";
 var builder = WebApplication.CreateBuilder(args);
@@ -77,8 +76,8 @@ builder.Services.AddCors(options =>
     options.AddPolicy(_policyName,
         builder =>
         {
-            builder.SetIsOriginAllowed(isOriginAllowed: _ => true).WithOrigins("http://localhost:3000/", "*")
-                                .AllowAnyHeader()
+            builder.SetIsOriginAllowed(isOriginAllowed: _ => true).WithOrigins("https://ayodhya-dham.in", "http://localhost:3000/", "*")
+            .AllowAnyHeader()
                                 .AllowAnyMethod();
         });
 });
