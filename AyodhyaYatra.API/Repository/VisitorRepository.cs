@@ -36,22 +36,22 @@ namespace AyodhyaYatra.API.Repository
                 if(string.IsNullOrEmpty(visitor.DocumentNumber))
                     throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
 
-                Regex regex;
-                switch (docType.DocNumberDataType)
-                {
-                    case "Numeric":
-                        regex = new(@"^\d$");
-                        if(!IsDigitsOnly(visitor.DocumentNumber))
-                            throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
-                        break;
-                    case "AlphaNumeric":
-                        regex = new(@"^[a-zA-Z][a-zA-Z0-9]*$");
-                        if (!regex.IsMatch(visitor.DocumentNumber))
-                            throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
-                        break;
-                    default:
-                        throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
-                }
+                //Regex regex;
+                //switch (docType.DocNumberDataType)
+                //{
+                //    case "Numeric":
+                //        regex = new(@"^\d$");
+                //        if(!IsDigitsOnly(visitor.DocumentNumber))
+                //            throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
+                //        break;
+                //    case "AlphaNumeric":
+                //        regex = new(@"^[a-zA-Z][a-zA-Z0-9]*$");
+                //        if (!regex.IsMatch(visitor.DocumentNumber))
+                //            throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
+                //        break;
+                //    default:
+                //        throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
+                //}
                 visitor.UniqueId = Guid.NewGuid();
                 visitor.RegistrationDate= DateTime.Now;
                 var entity = _context.Add(visitor);
