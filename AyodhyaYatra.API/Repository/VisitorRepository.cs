@@ -33,8 +33,8 @@ namespace AyodhyaYatra.API.Repository
             var docType=await _context.VisitorDocumentTypes.Where(x=>!x.IsDeleted && x.Id==visitor.DocumentTypeId).FirstOrDefaultAsync()?? throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocType, StaticValues.Error_InvalidGovDocType);
             if (!string.IsNullOrEmpty(docType.DocNumberDataType))
             {
-                if(string.IsNullOrEmpty(visitor.DocumentNumber))
-                    throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
+               // if(string.IsNullOrEmpty(visitor.DocumentNumber))
+                //    throw new BusinessRuleViolationException(StaticValues.ErrorType_InvalidGovDocNo, StaticValues.Error_InvalidGovDocNo);
 
                 //Regex regex;
                 //switch (docType.DocNumberDataType)
