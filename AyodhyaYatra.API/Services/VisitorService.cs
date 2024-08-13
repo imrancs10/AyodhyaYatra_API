@@ -14,11 +14,13 @@ namespace AyodhyaYatra.API.Services
         private readonly IVisitorRepository _visitorRepository;
         private readonly IMapper _mapper;
         private readonly IQrCodeService _qrCodeService;
-        public VisitorService(IVisitorRepository visitorRepository,IMapper mapper,IQrCodeService qrCodeService)
+        private readonly IConfiguration _configuration;
+        public VisitorService(IVisitorRepository visitorRepository,IMapper mapper,IQrCodeService qrCodeService, IConfiguration configuration)
         {
             _mapper = mapper;
             _visitorRepository = visitorRepository;
             _qrCodeService = qrCodeService;
+            _configuration = configuration;
         }
         public async Task<int> AddDocumentType(VisitorDocumentTypeRequest documentTypeReq)
         {
@@ -55,7 +57,13 @@ namespace AyodhyaYatra.API.Services
 
         public async Task<List<VisitorResponse>> GetVisitor(string mobileNo)
         {
-            return _mapper.Map<List<VisitorResponse>>(await _visitorRepository.GetVisitor(mobileNo));
+            var data = _mapper.Map<List<VisitorResponse>>(await _visitorRepository.GetVisitor(mobileNo));
+            string? ImagePath = _configuration.GetSection("VisitorQrCodesPath").Value;
+            foreach (var item in data)
+            {
+                item.QrImage = Path.Combine(ImagePath, item.UniqueId.ToString() + ".png");
+            }
+           return data;
         }
 
         public async Task<bool> UpdateDocumentType(VisitorDocumentTypeRequest documentTypeReq)
